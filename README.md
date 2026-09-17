@@ -9,12 +9,12 @@
 <br>
 
 <a href="https://git.io/typing-svg">
-  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=26&duration=3000&pause=1000&color=00D4AA&center=true&vCenter=true&repeat=true&width=820&height=42&lines=I+deploy+it%2C+break+it+on+purpose%2C+then+teach+AI+to+fix+it.;Building+infra+that+pages+the+LLM+before+it+pages+me.;I+build+it%2C+ship+it%2C+observe+it%2C+and+automate+the+3+AM+page.;Kubernetes+in+dev%2C+Chaos+Mesh+in+staging%2C+sleep+in+production." alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=22&duration=3000&pause=1000&color=00D4AA&center=true&vCenter=true&repeat=true&width=700&height=40&lines=I+deploy+it%2C+break+it%2C+then+teach+AI+to+fix+it.;Building+infra+that+pages+the+LLM+before+it+pages+me.;Build+it%2C+ship+it%2C+observe+it%2C+automate+the+3+AM+page.;K8s+in+dev%2C+Chaos+Mesh+in+staging%2C+sleep+in+prod." alt="Typing SVG" />
 </a>
 
 <br>
 
-<sub><b>Likith Lochan</b> · B.E. Computer Science · DevOps · LLMOps · Platform Engineering</sub>
+<sub><b>Likith Lochan</b> · B.E. Computer Science · DevOps · LLMOps · Software Engineering · Full-Stack Development</sub>
 
 </div>
 
@@ -148,23 +148,19 @@ Day to day, I work in Kubernetes clusters, Terraform modules, CI/CD pipelines, a
 
 <div align="center">
 
-<a href="https://github.com/anuraghazra/github-readme-stats">
-  <img src="https://github-readme-stats.vercel.app/api?username=likith1231&show_icons=true&include_all_commits=true&bg_color=0d1117&border_color=30363d&title_color=00d4aa&text_color=c9d1d9&icon_color=00d4aa&hide_border=false&rank_icon=github" alt="GitHub Stats" height="200"/>
-</a>
-&nbsp;
-<a href="https://github.com/anuraghazra/github-readme-stats">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=likith1231&layout=donut&bg_color=0d1117&border_color=30363d&title_color=00d4aa&text_color=c9d1d9&hide_border=false&langs_count=8" alt="Top Languages" height="200"/>
-</a>
-
-</div>
+![Profile Details](https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=likith1231&theme=github_dark)
 
 <br>
 
-<div align="center">
+![Stats](https://github-profile-summary-cards.vercel.app/api/cards/stats?username=likith1231&theme=github_dark)
+&nbsp;
+![Top Languages by Repo](https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=likith1231&theme=github_dark)
 
-<a href="https://github.com/ashutosh00710/github-readme-activity-graph">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=likith1231&bg_color=0d1117&color=c9d1d9&line=00d4aa&point=c9d1d9&area=true&area_color=00d4aa&hide_border=true" alt="Contribution Graph" width="95%"/>
-</a>
+<br>
+
+![Top Languages by Commit](https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=likith1231&theme=github_dark)
+&nbsp;
+![Commits by Time](https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=likith1231&theme=github_dark&utcOffset=5.5)
 
 </div>
 
