@@ -21,10 +21,40 @@
 <br>
 
 <!-- ═══════════════════════════════════════════════════════════ -->
-<!-- ABOUT: Broad identity across DevOps / LLMOps / SDE          -->
+<!-- ABOUT: Terminal-style two-panel whoami                       -->
 <!-- ═══════════════════════════════════════════════════════════ -->
 
-## `> whoami`
+<div align="center">
+
+<h3>
+<code>likith@github ~ $ whoami</code>
+</h3>
+
+<table>
+<tr>
+
+<td valign="top">
+<img
+  src="./avi-ascii.svg"
+  width="430"
+  alt="ASCII terminal art"
+/>
+</td>
+
+<td valign="top">
+<img
+  src="./info-card.svg"
+  width="430"
+  alt="Developer information"
+/>
+</td>
+
+</tr>
+</table>
+
+</div>
+
+<br>
 
 CS undergrad working across **DevOps**, **LLMOps**, and **full-stack engineering** — building production infrastructure, autonomous AI pipelines, and the applications that run on both.
 
@@ -141,26 +171,34 @@ Day to day, I work in Kubernetes clusters, Terraform modules, CI/CD pipelines, a
 <br>
 
 <!-- ═══════════════════════════════════════════════════════════ -->
-<!-- STATS: GitHub stats + donut top-langs + activity graph      -->
+<!-- STATS: Self-hosted metrics (lowlighter/metrics Action)      -->
 <!-- ═══════════════════════════════════════════════════════════ -->
 
 ## `> uptime --stats`
 
 <div align="center">
 
-![Profile Details](https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=likith1231&theme=github_dark)
+![GitHub Metrics](./github-metrics.svg)
+
+</div>
 
 <br>
 
-![Stats](https://github-profile-summary-cards.vercel.app/api/cards/stats?username=likith1231&theme=github_dark)
-&nbsp;
-![Top Languages by Repo](https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=likith1231&theme=github_dark)
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- CONTRIBUTIONS: Animated snake (Platane/snk Action)          -->
+<!-- ═══════════════════════════════════════════════════════════ -->
 
-<br>
+<div align="center">
 
-![Top Languages by Commit](https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=likith1231&theme=github_dark)
-&nbsp;
-![Commits by Time](https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=likith1231&theme=github_dark&utcOffset=5.5)
+<h3>
+<code>likith@github ~ $ ./contributions.sh</code>
+</h3>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/likith1231/likith1231/output/github-snake-dark.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/likith1231/likith1231/output/github-snake.svg" />
+  <img alt="Snake animation" src="https://raw.githubusercontent.com/likith1231/likith1231/output/github-snake-dark.svg" width="860" />
+</picture>
 
 </div>
 
