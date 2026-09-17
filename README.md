@@ -183,8 +183,8 @@ $ echo $CONTACT
     <img src="https://img.shields.io/badge/-likithlu3@gmail.com-0d1117?style=flat-square&logo=gmail&logoColor=00d4aa" alt="Email"/>
   </a>
   &nbsp;&nbsp;
-  <a href="https://www.linkedin.com/in/likithlochan">
-    <img src="https://img.shields.io/badge/-likithlochan-0d1117?style=flat-square&logo=linkedin&logoColor=00d4aa" alt="LinkedIn"/>
+  <a href="https://www.linkedin.com/in/likith-lochan-2ab93b290">
+    <img src="https://img.shields.io/badge/-Likith_Lochan-0d1117?style=flat-square&logo=linkedin&logoColor=00d4aa" alt="LinkedIn"/>
   </a>
 </p>
 
