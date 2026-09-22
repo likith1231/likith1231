@@ -1,7 +1,7 @@
 <div align="center">
 
 <!-- ═══════════════════════════════════════════════════════════ -->
-<!-- HEADER: Self-hosted arc-reactor banner + typing SVG hook    -->
+<!-- HEADER: Self-hosted lighthouse banner + typing SVG hook     -->
 <!-- ═══════════════════════════════════════════════════════════ -->
 
 <img src="./banner.svg" width="100%" alt="Likith Lochan — DevOps · Backend/Full-Stack · Applied AI"/>
@@ -9,7 +9,7 @@
 <br><br>
 
 <a href="https://git.io/typing-svg">
-  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=20&duration=3000&pause=1000&color=F2B134&center=true&vCenter=true&repeat=true&width=760&height=40&lines=Booting+J.A.R.V.I.S.+for+another+deploy.;Compiling+the+next+Mark+while+CI+runs.;Suiting+up%3A+Kubernetes+as+my+exosuit.;Arc+reactor+status%3A+small%2C+contained%2C+always+on." alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=20&duration=3000&pause=1000&color=FFB454&center=true&vCenter=true&repeat=true&width=760&height=40&lines=Watching+the+dashboards+so+you+don%27t+have+to.;Shipping+at+night%2C+debugging+by+lighthouse.;Small%2C+steady+signal%3A+the+deploy+went+fine.;Multi-agent+crew+on+watch+while+I+sleep." alt="Typing SVG" />
 </a>
 
 </div>
@@ -17,7 +17,7 @@
 <br>
 
 <!-- ═══════════════════════════════════════════════════════════ -->
-<!-- ABOUT: Mark-I helmet + J.A.R.V.I.S. status panel             -->
+<!-- ABOUT: Beacon illustration + signal log status panel        -->
 <!-- ═══════════════════════════════════════════════════════════ -->
 
 <div align="center">
@@ -31,9 +31,9 @@
 
 <td valign="top">
 <img
-  src="./mark-helmet.svg"
+  src="./beacon.svg"
   width="430"
-  alt="Mark-I helmet line art"
+  alt="Lighthouse beacon illustration, night watch"
 />
 </td>
 
@@ -41,7 +41,7 @@
 <img
   src="./info-card.svg"
   width="430"
-  alt="J.A.R.V.I.S. developer status panel"
+  alt="Signal log developer status panel"
 />
 </td>
 
@@ -60,10 +60,10 @@ I'm currently sharpening my skills toward DevOps/Cloud engineering roles, while 
 
 <div align="center">
 
-![Open to](https://img.shields.io/badge/OPEN_TO-DevOps%2FCloud-f2b134?style=for-the-badge&labelColor=05070c)
-![Open to](https://img.shields.io/badge/-Backend-3fd2ef?style=for-the-badge&labelColor=05070c&color=0b0f18)
-![Open to](https://img.shields.io/badge/-SDE-3fd2ef?style=for-the-badge&labelColor=05070c&color=0b0f18)
-![Open to](https://img.shields.io/badge/-AI%2FML_Engineer-3fd2ef?style=for-the-badge&labelColor=05070c&color=0b0f18)
+![Open to](https://img.shields.io/badge/OPEN_TO-DevOps%2FCloud-ffb454?style=for-the-badge&labelColor=05070c)
+![Open to](https://img.shields.io/badge/-Backend-5fd0c9?style=for-the-badge&labelColor=05070c&color=081019)
+![Open to](https://img.shields.io/badge/-SDE-5fd0c9?style=for-the-badge&labelColor=05070c&color=081019)
+![Open to](https://img.shields.io/badge/-AI%2FML_Engineer-5fd0c9?style=for-the-badge&labelColor=05070c&color=081019)
 
 </div>
 
@@ -75,7 +75,7 @@ I'm currently sharpening my skills toward DevOps/Cloud engineering roles, while 
 
 <div align="center">
 
-<img src="./protocols.svg" width="100%" alt="Protocols: ship it then armor it, automate the boring, verify before trusting it"/>
+<img src="./protocols.svg" width="100%" alt="Field notes: ship it then armor it, automate the boring, verify before trusting it"/>
 
 </div>
 
@@ -213,12 +213,12 @@ I'm currently sharpening my skills toward DevOps/Cloud engineering roles, while 
 </h3>
 
 <p align="center">
-  <a href="mailto:likithlu3@gmail.com">
-    <img src="https://img.shields.io/badge/-likithlu3@gmail.com-05070c?style=flat-square&logo=gmail&logoColor=f2b134" alt="Email"/>
+  <a href="https://www.linkedin.com/in/likith-lochan-2ab93b290">
+    <img src="./link-linkedin.svg" width="248" alt="LinkedIn: Likith Lochan"/>
   </a>
   &nbsp;&nbsp;
-  <a href="https://www.linkedin.com/in/likith-lochan-2ab93b290">
-    <img src="https://img.shields.io/badge/-Likith_Lochan-05070c?style=flat-square&logo=linkedin&logoColor=3fd2ef" alt="LinkedIn"/>
+  <a href="mailto:likithlu3@gmail.com">
+    <img src="./link-email.svg" width="248" alt="Email: likithlu3@gmail.com"/>
   </a>
 </p>
 
@@ -228,4 +228,4 @@ I'm currently sharpening my skills toward DevOps/Cloud engineering roles, while 
 <!-- FOOTER: Matching wave                                       -->
 <!-- ═══════════════════════════════════════════════════════════ -->
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:f2b134,50:0b0f18,100:05070c&height=120&section=footer&fontSize=0" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:ffb454,50:0a1620,100:050a10&height=120&section=footer&fontSize=0" width="100%"/>
