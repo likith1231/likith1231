@@ -1,27 +1,23 @@
 <div align="center">
 
 <!-- ═══════════════════════════════════════════════════════════ -->
-<!-- HEADER: Capsule wave banner + typing SVG hook               -->
+<!-- HEADER: Self-hosted arc-reactor banner + typing SVG hook    -->
 <!-- ═══════════════════════════════════════════════════════════ -->
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:161b22,100:00d4aa&height=180&section=header&fontSize=0" width="100%"/>
+<img src="./banner.svg" width="100%" alt="Likith Lochan — DevOps · Backend/Full-Stack · Applied AI"/>
 
-<br>
+<br><br>
 
 <a href="https://git.io/typing-svg">
-  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=22&duration=3000&pause=1000&color=00D4AA&center=true&vCenter=true&repeat=true&width=700&height=40&lines=I+deploy+it%2C+break+it%2C+then+teach+AI+to+fix+it.;Building+infra+that+pages+the+LLM+before+it+pages+me.;Build+it%2C+ship+it%2C+observe+it%2C+automate+the+3+AM+page.;K8s+in+dev%2C+Chaos+Mesh+in+staging%2C+sleep+in+prod." alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=20&duration=3000&pause=1000&color=F2B134&center=true&vCenter=true&repeat=true&width=760&height=40&lines=Booting+J.A.R.V.I.S.+for+another+deploy.;Compiling+the+next+Mark+while+CI+runs.;Suiting+up%3A+Kubernetes+as+my+exosuit.;Arc+reactor+status%3A+small%2C+contained%2C+always+on." alt="Typing SVG" />
 </a>
-
-<br>
-
-<sub><b>Likith Lochan</b> · B.E. Computer Science, APS College of Engineering · DevOps · Backend/Full-Stack · Applied AI</sub>
 
 </div>
 
 <br>
 
 <!-- ═══════════════════════════════════════════════════════════ -->
-<!-- ABOUT: Terminal-style two-panel whoami                       -->
+<!-- ABOUT: Mark-I helmet + J.A.R.V.I.S. status panel             -->
 <!-- ═══════════════════════════════════════════════════════════ -->
 
 <div align="center">
@@ -35,9 +31,9 @@
 
 <td valign="top">
 <img
-  src="./avi-ascii.svg"
+  src="./mark-helmet.svg"
   width="430"
-  alt="ASCII terminal art"
+  alt="Mark-I helmet line art"
 />
 </td>
 
@@ -45,7 +41,7 @@
 <img
   src="./info-card.svg"
   width="430"
-  alt="Developer information"
+  alt="J.A.R.V.I.S. developer status panel"
 />
 </td>
 
@@ -64,10 +60,22 @@ I'm currently sharpening my skills toward DevOps/Cloud engineering roles, while 
 
 <div align="center">
 
-![Open to](https://img.shields.io/badge/OPEN_TO-DevOps%2FCloud-00d4aa?style=for-the-badge&labelColor=0d1117)
-![Open to](https://img.shields.io/badge/-Backend-00d4aa?style=for-the-badge&labelColor=0d1117&color=161b22)
-![Open to](https://img.shields.io/badge/-SDE-00d4aa?style=for-the-badge&labelColor=0d1117&color=161b22)
-![Open to](https://img.shields.io/badge/-AI%2FML_Engineer-00d4aa?style=for-the-badge&labelColor=0d1117&color=161b22)
+![Open to](https://img.shields.io/badge/OPEN_TO-DevOps%2FCloud-f2b134?style=for-the-badge&labelColor=05070c)
+![Open to](https://img.shields.io/badge/-Backend-3fd2ef?style=for-the-badge&labelColor=05070c&color=0b0f18)
+![Open to](https://img.shields.io/badge/-SDE-3fd2ef?style=for-the-badge&labelColor=05070c&color=0b0f18)
+![Open to](https://img.shields.io/badge/-AI%2FML_Engineer-3fd2ef?style=for-the-badge&labelColor=05070c&color=0b0f18)
+
+</div>
+
+<br>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- PROTOCOLS: How I build, in three lines                       -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+
+<div align="center">
+
+<img src="./protocols.svg" width="100%" alt="Protocols: ship it then armor it, automate the boring, verify before trusting it"/>
 
 </div>
 
@@ -164,9 +172,11 @@ I'm currently sharpening my skills toward DevOps/Cloud engineering roles, while 
 <!-- STATS: Self-hosted metrics (lowlighter/metrics Action)      -->
 <!-- ═══════════════════════════════════════════════════════════ -->
 
-## `> uptime --stats`
-
 <div align="center">
+
+<h3>
+<code>likith@github ~ $ uptime --stats</code>
+</h3>
 
 ![GitHub Metrics](./github-metrics.svg)
 
@@ -198,17 +208,17 @@ I'm currently sharpening my skills toward DevOps/Cloud engineering roles, while 
 <!-- CONTACT: Separated from markdown to ensure links render     -->
 <!-- ═══════════════════════════════════════════════════════════ -->
 
-```
-$ echo $CONTACT
-```
+<h3 align="center">
+<code>likith@github ~ $ ./contact.sh</code>
+</h3>
 
 <p align="center">
   <a href="mailto:likithlu3@gmail.com">
-    <img src="https://img.shields.io/badge/-likithlu3@gmail.com-0d1117?style=flat-square&logo=gmail&logoColor=00d4aa" alt="Email"/>
+    <img src="https://img.shields.io/badge/-likithlu3@gmail.com-05070c?style=flat-square&logo=gmail&logoColor=f2b134" alt="Email"/>
   </a>
   &nbsp;&nbsp;
   <a href="https://www.linkedin.com/in/likith-lochan-2ab93b290">
-    <img src="https://img.shields.io/badge/-Likith_Lochan-0d1117?style=flat-square&logo=linkedin&logoColor=00d4aa" alt="LinkedIn"/>
+    <img src="https://img.shields.io/badge/-Likith_Lochan-05070c?style=flat-square&logo=linkedin&logoColor=3fd2ef" alt="LinkedIn"/>
   </a>
 </p>
 
@@ -218,4 +228,4 @@ $ echo $CONTACT
 <!-- FOOTER: Matching wave                                       -->
 <!-- ═══════════════════════════════════════════════════════════ -->
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:00d4aa,50:161b22,100:0d1117&height=120&section=footer&fontSize=0" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:f2b134,50:0b0f18,100:05070c&height=120&section=footer&fontSize=0" width="100%"/>

@@ -1,257 +1,69 @@
-<svg width="490" height="500" viewBox="0 0 490 500"
-     xmlns="http://www.w3.org/2000/svg">
+<svg width="490" height="500" viewBox="0 0 490 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="panelBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b0f18"/>
+      <stop offset="100%" stop-color="#05070c"/>
+    </linearGradient>
+    <linearGradient id="rule" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f2b134"/>
+      <stop offset="100%" stop-color="#f2b134" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="dotGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#bdf4ff"/>
+      <stop offset="60%" stop-color="#3fd2ef"/>
+      <stop offset="100%" stop-color="#3fd2ef" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
 
-  <!-- Main terminal window -->
-  <rect
-    width="490"
-    height="500"
-    rx="12"
-    fill="#0d1117"
-    stroke="#30363d"
-    stroke-width="2"
-  />
+  <rect width="490" height="500" rx="10" fill="url(#panelBg)" stroke="#1c2433" stroke-width="2"/>
 
-  <!-- Terminal buttons -->
-  <circle cx="22" cy="22" r="6" fill="#ff5f56"/>
-  <circle cx="42" cy="22" r="6" fill="#ffbd2e"/>
-  <circle cx="62" cy="22" r="6" fill="#27c93f"/>
-
-  <!-- Header -->
-  <text
-    x="25"
-    y="65"
-    fill="#58a6ff"
-    font-family="monospace"
-    font-size="20"
-    font-weight="bold"
-  >
-    likith1231@github
-  </text>
-
-  <text
-    x="25"
-    y="88"
-    fill="#8b949e"
-    font-family="monospace"
-    font-size="13"
-  >
-    ─────────────────────────────────────
-  </text>
-
-
-  <!-- ROLE -->
-  <g>
-
-    <text
-      x="25"
-      y="125"
-      fill="#00d4aa"
-      font-family="monospace"
-      font-size="16"
-    >
-      &gt; ROLE
-    </text>
-
-    <text
-      x="150"
-      y="125"
-      fill="#c9d1d9"
-      font-family="monospace"
-      font-size="16"
-    >
-      CS Undergrad, B.E.
-    </text>
-
+  <!-- HUD corner brackets -->
+  <g stroke="#f2b134" stroke-width="2.5" fill="none">
+    <path d="M14,34 V14 H34"/>
+    <path d="M456,14 H476 V34"/>
+    <path d="M476,466 V486 H456"/>
+    <path d="M34,486 H14 V466"/>
   </g>
 
+  <!-- status dot -->
+  <circle cx="440" cy="24" r="10" fill="url(#dotGlow)"/>
+  <circle cx="440" cy="24" r="3.5" fill="#eafcff"/>
 
-  <!-- EDU -->
-  <g>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+    <text x="30" y="60" fill="#f2b134" font-size="19" font-weight="700" letter-spacing="1">J.A.R.V.I.S.</text>
+    <text x="30" y="80" fill="#5c667c" font-size="12" letter-spacing="1">// likith1231@github</text>
 
-    <text
-      x="25"
-      y="170"
-      fill="#00d4aa"
-      font-family="monospace"
-      font-size="16"
-    >
-      &gt; EDU
-    </text>
+    <rect x="30" y="96" width="430" height="2" fill="url(#rule)"/>
 
-    <text
-      x="150"
-      y="170"
-      fill="#c9d1d9"
-      font-family="monospace"
-      font-size="16"
-    >
-      APS College of Engg.
-    </text>
+    <!-- rows -->
+    <g font-size="15">
+      <text x="30" y="136" fill="#f2b134">&gt; ROLE</text>
+      <text x="155" y="136" fill="#e6e9f2">CS Undergrad, B.E.</text>
 
+      <text x="30" y="176" fill="#f2b134">&gt; EDU</text>
+      <text x="155" y="176" fill="#e6e9f2">APS College of Engg.</text>
+
+      <text x="30" y="216" fill="#f2b134">&gt; FOCUS</text>
+      <text x="155" y="216" fill="#e6e9f2">DevOps · Backend · AI</text>
+
+      <text x="30" y="256" fill="#f2b134">&gt; WORKFLOW</text>
+      <text x="155" y="256" fill="#e6e9f2">Multi-agent AI (x3)</text>
+
+      <text x="30" y="296" fill="#f2b134">&gt; TOOLS</text>
+      <text x="155" y="296" fill="#e6e9f2">K8s / Terraform / RAG</text>
+
+      <text x="30" y="336" fill="#f2b134">&gt; OPEN TO</text>
+      <text x="155" y="336" fill="#e6e9f2">DevOps / SDE / AI-ML</text>
+
+      <text x="30" y="376" fill="#f2b134">&gt; STATUS</text>
+      <text x="155" y="376" fill="#e6e9f2">SUIT ONLINE</text>
+      <circle cx="270" cy="371" r="5" fill="#39d353">
+        <animate attributeName="opacity" values="1;0.35;1" dur="2s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+
+    <line x1="30" y1="410" x2="460" y2="410" stroke="#1c2433"/>
+
+    <text x="30" y="450" fill="#5c667c" font-size="13">$ initiate_protocol("keep_building")<tspan fill="#3fd2ef">_</tspan></text>
   </g>
-
-
-  <!-- FOCUS -->
-  <g>
-
-    <text
-      x="25"
-      y="215"
-      fill="#00d4aa"
-      font-family="monospace"
-      font-size="16"
-    >
-      &gt; FOCUS
-    </text>
-
-    <text
-      x="150"
-      y="215"
-      fill="#c9d1d9"
-      font-family="monospace"
-      font-size="16"
-    >
-      DevOps · Backend · AI
-    </text>
-
-  </g>
-
-
-  <!-- WORKFLOW -->
-  <g>
-
-    <text
-      x="25"
-      y="260"
-      fill="#00d4aa"
-      font-family="monospace"
-      font-size="16"
-    >
-      &gt; WORKFLOW
-    </text>
-
-    <text
-      x="150"
-      y="260"
-      fill="#c9d1d9"
-      font-family="monospace"
-      font-size="16"
-    >
-      Multi-agent AI (x3)
-    </text>
-
-  </g>
-
-
-  <!-- TOOLS -->
-  <g>
-
-    <text
-      x="25"
-      y="305"
-      fill="#00d4aa"
-      font-family="monospace"
-      font-size="16"
-    >
-      &gt; TOOLS
-    </text>
-
-    <text
-      x="150"
-      y="305"
-      fill="#c9d1d9"
-      font-family="monospace"
-      font-size="16"
-    >
-      K8s / Terraform / RAG
-    </text>
-
-  </g>
-
-
-  <!-- OPEN TO -->
-  <g>
-
-    <text
-      x="25"
-      y="350"
-      fill="#00d4aa"
-      font-family="monospace"
-      font-size="16"
-    >
-      &gt; OPEN TO
-    </text>
-
-    <text
-      x="150"
-      y="350"
-      fill="#c9d1d9"
-      font-family="monospace"
-      font-size="16"
-    >
-      DevOps / SDE / AI-ML
-    </text>
-
-  </g>
-
-
-  <!-- STATUS -->
-  <g>
-
-    <text
-      x="25"
-      y="395"
-      fill="#00d4aa"
-      font-family="monospace"
-      font-size="16"
-    >
-      &gt; STATUS
-    </text>
-
-    <text
-      x="150"
-      y="395"
-      fill="#c9d1d9"
-      font-family="monospace"
-      font-size="16"
-    >
-      ONLINE
-    </text>
-
-    <circle cx="230" cy="390" r="5" fill="#27c93f">
-      <animate
-        attributeName="opacity"
-        values="1;0.3;1"
-        dur="2s"
-        repeatCount="indefinite"
-      />
-    </circle>
-
-  </g>
-
-
-  <!-- Footer prompt -->
-  <line x1="0" y1="440" x2="490" y2="440" stroke="#30363d"/>
-
-  <text
-    x="25"
-    y="470"
-    fill="#7d8590"
-    font-family="monospace"
-    font-size="13"
-  >
-    $ echo "keep building"
-  </text>
-
-  <!-- Blinking cursor -->
-  <rect x="246" y="458" width="8" height="14" fill="#c9d1d9">
-    <animate
-      attributeName="opacity"
-      values="1;1;0;0"
-      keyTimes="0;0.5;0.51;1"
-      dur="1s"
-      repeatCount="indefinite"
-    />
-  </rect>
-
 </svg>

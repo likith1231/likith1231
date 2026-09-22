@@ -1,0 +1,88 @@
+<svg width="490" height="500" viewBox="0 0 490 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="panelBg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b0f18"/>
+      <stop offset="100%" stop-color="#05070c"/>
+    </linearGradient>
+    <linearGradient id="faceRed" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e2483a"/>
+      <stop offset="55%" stop-color="#a4271f"/>
+      <stop offset="100%" stop-color="#6e150f"/>
+    </linearGradient>
+    <linearGradient id="jawGold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffd873"/>
+      <stop offset="100%" stop-color="#d99a1d"/>
+    </linearGradient>
+    <radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#bdf4ff"/>
+      <stop offset="100%" stop-color="#3fd2ef" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="eyeBlur" x="-150%" y="-150%" width="400%" height="400%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+  </defs>
+
+  <rect width="490" height="500" rx="10" fill="url(#panelBg2)" stroke="#1c2433" stroke-width="2"/>
+
+  <g stroke="#f2b134" stroke-width="2.5" fill="none">
+    <path d="M14,34 V14 H34"/>
+    <path d="M456,14 H476 V34"/>
+    <path d="M476,466 V486 H456"/>
+    <path d="M34,486 H14 V466"/>
+  </g>
+
+  <text x="30" y="46" fill="#5c667c" font-family="ui-monospace, monospace" font-size="12" letter-spacing="1">// MARK-I HELMET · LINE ART</text>
+
+  <!-- faint concentric HUD rings behind the mask -->
+  <g stroke="#182234" fill="none">
+    <circle cx="245" cy="230" r="185"/>
+    <circle cx="245" cy="230" r="150"/>
+  </g>
+
+  <!-- helmet silhouette (mirrored polygon) -->
+  <g transform="translate(245,230)">
+    <path d="
+      M0,-150
+      L52,-138 L84,-100 L96,-40 L84,32 L54,92 L16,132
+      L0,142
+      L-16,132 L-54,92 L-84,32 L-96,-40 L-84,-100 L-52,-138
+      Z"
+      fill="url(#faceRed)" stroke="#2a0a08" stroke-width="3"/>
+
+    <!-- gold jaw / brow trim -->
+    <path d="M-96,-40 L-84,-100 L-52,-138 L0,-150 L52,-138 L84,-100 L96,-40"
+      fill="none" stroke="url(#jawGold)" stroke-width="6" stroke-linejoin="round"/>
+    <path d="M-54,92 L-16,132 L0,142 L16,132 L54,92"
+      fill="none" stroke="url(#jawGold)" stroke-width="6" stroke-linejoin="round"/>
+
+    <!-- center seam -->
+    <path d="M0,-150 L0,142" stroke="#3a0d0a" stroke-width="2" opacity="0.7"/>
+    <!-- brow seams -->
+    <path d="M-52,-138 L-30,-70" stroke="#3a0d0a" stroke-width="2" opacity="0.6"/>
+    <path d="M52,-138 L30,-70" stroke="#3a0d0a" stroke-width="2" opacity="0.6"/>
+
+    <!-- antenna -->
+    <path d="M0,-150 L0,-166" stroke="#c9c9d4" stroke-width="3"/>
+    <circle cx="0" cy="-170" r="4" fill="#c9c9d4"/>
+
+    <!-- eyes -->
+    <g>
+      <polygon points="-70,-18 -22,-26 -18,-6 -64,4" fill="url(#eyeGlow)" filter="url(#eyeBlur)"/>
+      <polygon points="70,-18 22,-26 18,-6 64,4" fill="url(#eyeGlow)" filter="url(#eyeBlur)"/>
+      <polygon points="-64,-14 -24,-21 -21,-9 -60,-2" fill="#eafcff"/>
+      <polygon points="64,-14 24,-21 21,-9 60,-2" fill="#eafcff"/>
+    </g>
+
+    <!-- mouth vents -->
+    <g stroke="#3a0d0a" stroke-width="3" opacity="0.75">
+      <path d="M-26,100 L-26,118"/>
+      <path d="M-9,106 L-9,124"/>
+      <path d="M9,106 L9,124"/>
+      <path d="M26,100 L26,118"/>
+    </g>
+  </g>
+
+  <text x="245" y="440" fill="#7d8699" font-family="ui-monospace, monospace" font-size="13" text-anchor="middle">status: suit under construction</text>
+  <text x="245" y="462" fill="#3a4558" font-family="ui-monospace, monospace" font-size="12" text-anchor="middle">mark · perpetually in the shop</text>
+</svg>
