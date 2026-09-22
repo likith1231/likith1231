@@ -14,7 +14,7 @@
 
 <br>
 
-<sub><b>Likith Lochan</b> · B.E. Computer Science · DevOps · LLMOps · Software Engineering · Full-Stack Development</sub>
+<sub><b>Likith Lochan</b> · B.E. Computer Science, APS College of Engineering · DevOps · Backend/Full-Stack · Applied AI</sub>
 
 </div>
 
@@ -56,11 +56,20 @@
 
 <br>
 
-CS undergrad working across **DevOps**, **LLMOps**, and **full-stack engineering** — building production infrastructure, autonomous AI pipelines, and the applications that run on both.
+I'm a B.E. Computer Science student at APS College of Engineering, building toward a career across DevOps, backend/full-stack engineering, and applied AI. My work spans production-style infrastructure (Kubernetes, Terraform, observability pipelines), full-stack apps (MERN/PERN/Next.js), and AI-driven systems (autonomous incident response, RAG, NLP-based classification).
 
-I run a coordinated multi-agent AI workflow (Claude, Gemini, Antigravity) across my projects — not for autocomplete, but as a deliberate part of how I architect, debug, and ship. I treat AI tooling as infrastructure, not a shortcut.
+I like building things end-to-end — from writing the backend logic to deploying, monitoring, and debugging them in something close to a real production environment. Recently I've focused on AIOps and SRE-style projects (like GhostOps, an autonomous incident-diagnosis-and-patch pipeline) alongside more traditional full-stack builds. I also run a multi-agent AI development workflow (Claude, Gemini, and Antigravity working together) to build and ship projects faster.
 
-Day to day, I work in Kubernetes clusters, Terraform modules, CI/CD pipelines, and observability stacks. I've shipped enough production deploys to have real war stories about what breaks — OpenTelemetry race conditions, cascading dependency failures, timezone bugs you only catch in prod. I build full-stack when the job needs it, but my north star is what happens *after* the code ships: keeping systems observable, recoverable, and as self-healing as I can make them.
+I'm currently sharpening my skills toward DevOps/Cloud engineering roles, while also open to Backend, SDE, and AI/ML Engineer positions — genuinely comfortable across all of them rather than narrowly specialized.
+
+<div align="center">
+
+![Open to](https://img.shields.io/badge/OPEN_TO-DevOps%2FCloud-00d4aa?style=for-the-badge&labelColor=0d1117)
+![Open to](https://img.shields.io/badge/-Backend-00d4aa?style=for-the-badge&labelColor=0d1117&color=161b22)
+![Open to](https://img.shields.io/badge/-SDE-00d4aa?style=for-the-badge&labelColor=0d1117&color=161b22)
+![Open to](https://img.shields.io/badge/-AI%2FML_Engineer-00d4aa?style=for-the-badge&labelColor=0d1117&color=161b22)
+
+</div>
 
 <br>
 
@@ -148,25 +157,6 @@ Day to day, I work in Kubernetes clusters, Terraform modules, CI/CD pipelines, a
 ![ngrok](https://img.shields.io/badge/ngrok-1F1E37?style=for-the-badge&logo=ngrok&logoColor=white)
 
 </div>
-
-<br>
-
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- FEATURED WORK: All projects with real measured outcomes      -->
-<!-- ═══════════════════════════════════════════════════════════ -->
-
-## `> ls ~/projects`
-
-| Project | What it is | Measured result / status |
-|:--------|:-----------|:------------------------|
-| [**ResilientCommerce**](https://github.com/likith1231/ResilientCommerce) | Production-style DevOps stack — K8s on Kind, Terraform IaC, Prometheus/Grafana, Jaeger distributed tracing, GitHub Actions CI/CD | Resolved a hard OTel/Sentry race condition in distributed tracing; cleaned 674 MB of leaked Terraform state & credentials from git history |
-| [**GhostOps**](https://github.com/likith1231/GhostOps) | Solo-built autonomous AIOps pipeline (originally scoped for 4 engineers) — multi-agent LLM incident response | 2 real end-to-end incident-response cycles with auto-generated PRs, correctly diagnosed/patched/validated; 18 passing tests |
-| [**Sahayak**](https://github.com/likith1231/sahayak) | Full-stack marketplace — live government mandi-pricing API integration + pgvector-based RAG search over listings | Deployed live (backend + frontend); resolved 6 consecutive failed production deploys |
-| [**AetherMed**](https://github.com/likith1231/Aethermed) | Full-stack medical booking platform with custom AI booking-assistant flow | Deployed live on Vercel |
-| [**Orbit-IDE**](https://github.com/likith1231/Orbit-IDE) | Browser IDE — Docker-sandboxed execution across 15 languages + real-time collaboration | Solved Docker-socket hosting constraint via persistent tunnel workaround |
-| [**Project Management**](https://github.com/likith1231/project-management) | PERN stack project management app with Clerk auth + background job processing | Deployed to Vercel |
-| [**AuthenCheck**](https://github.com/likith1231/AuthenCheck) | AI-powered browser extension — NLP/ML trust-scoring model to detect fake e-commerce reviews | Feature-complete |
-| [**Homelab**](https://github.com/likith1231/homelab) | Unified self-hosting platform — k3s, ArgoCD/GitOps, Terraform hybrid-burst to AWS EKS, runs other projects as tenants | In progress |
 
 <br>
 
