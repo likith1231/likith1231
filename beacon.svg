@@ -1,0 +1,100 @@
+<svg width="490" height="500" viewBox="0 0 490 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="skyP" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#060b12"/>
+      <stop offset="100%" stop-color="#0a1620"/>
+    </linearGradient>
+    <linearGradient id="seaP" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a1a22"/>
+      <stop offset="100%" stop-color="#050a10"/>
+    </linearGradient>
+    <linearGradient id="beamL" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffb454" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#ffb454" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="beamR" x1="1" y1="0" x2="0" y2="0">
+      <stop offset="0%" stop-color="#ffb454" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#ffb454" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="reflect" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffb454" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#ffb454" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="lampCoreP" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff6df"/>
+      <stop offset="45%" stop-color="#ffd98a"/>
+      <stop offset="100%" stop-color="#ffb454" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="softP" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+  </defs>
+
+  <rect width="490" height="500" rx="10" fill="#050a10" stroke="#17222f" stroke-width="2"/>
+
+  <g stroke="#2a3848" stroke-width="2">
+    <path d="M18,18 H34"/><path d="M18,18 V34"/>
+    <path d="M472,18 H456"/><path d="M472,18 V34"/>
+    <path d="M18,482 H34"/><path d="M18,482 V466"/>
+    <path d="M472,482 H456"/><path d="M472,482 V466"/>
+  </g>
+
+  <text x="30" y="42" fill="#5c667c" font-family="ui-monospace, monospace" font-size="12" letter-spacing="1">// BEACON · NIGHT WATCH</text>
+
+  <!-- scene, clipped to the panel interior -->
+  <clipPath id="scene"><rect x="12" y="52" width="466" height="380" rx="6"/></clipPath>
+  <g clip-path="url(#scene)">
+    <rect x="12" y="52" width="466" height="278" fill="url(#skyP)"/>
+    <rect x="12" y="330" width="466" height="102" fill="url(#seaP)"/>
+    <line x1="12" y1="330" x2="478" y2="330" stroke="#132030"/>
+
+    <g fill="#eaf6f4">
+      <circle cx="60" cy="90" r="1.3" opacity="0.7"/>
+      <circle cx="120" cy="130" r="1" opacity="0.45"/>
+      <circle cx="90" cy="170" r="1.2" opacity="0.6"/>
+      <circle cx="400" cy="80" r="1.3" opacity="0.7"/>
+      <circle cx="360" cy="140" r="1" opacity="0.5"/>
+      <circle cx="420" cy="180" r="1.1" opacity="0.55"/>
+      <circle cx="180" cy="70" r="1" opacity="0.5"/>
+      <circle cx="300" cy="60" r="1" opacity="0.45"/>
+    </g>
+
+    <!-- sonar rings -->
+    <g stroke="#5fd0c9" fill="none" stroke-width="1.4">
+      <circle cx="245" cy="207" r="26" opacity="0.5">
+        <animate attributeName="r" values="20;44;20" dur="4.8s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.5;0;0.5" dur="4.8s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+
+    <!-- cross beams -->
+    <g transform="translate(245,207)">
+      <path d="M0,0 L-260,-96 L-260,-30 Z" fill="url(#beamL)" filter="url(#softP)"/>
+      <path d="M0,0 L260,-96 L260,-30 Z" fill="url(#beamR)" filter="url(#softP)"/>
+    </g>
+
+    <!-- reflection -->
+    <rect x="225" y="330" width="40" height="90" fill="url(#reflect)"/>
+
+    <!-- tower -->
+    <path d="M225,330 L231,222 L259,222 L265,330 Z" fill="#101c28"/>
+    <path d="M227,292 L263,292 L262,300 L228,300 Z" fill="#ffb454" opacity="0.85"/>
+    <path d="M228,256 L262,256 L261,264 L229,264 Z" fill="#1c2b3a"/>
+    <rect x="219" y="330" width="52" height="10" fill="#0c1720"/>
+
+    <rect x="231" y="196" width="28" height="26" rx="2" fill="#0c1720" stroke="#3a4c5e" stroke-width="1.5"/>
+    <circle cx="245" cy="209" r="19" fill="url(#lampCoreP)"/>
+    <circle cx="245" cy="209" r="6" fill="#fffaf0"/>
+    <path d="M227,196 L263,196 L251,182 L239,182 Z" fill="#101c28"/>
+    <path d="M245,182 L245,168" stroke="#3a4c5e" stroke-width="2"/>
+    <circle cx="245" cy="165" r="2.5" fill="#5fd0c9"/>
+
+    <!-- distant boat -->
+    <path d="M355,352 L385,352 L378,362 L362,362 Z" fill="#0c1720"/>
+    <path d="M368,352 L368,338" stroke="#0c1720" stroke-width="1.5"/>
+    <circle cx="368" cy="336" r="2" fill="#ffb454"/>
+  </g>
+
+  <text x="245" y="450" fill="#8b98ab" font-family="ui-monospace, monospace" font-size="13" text-anchor="middle">beacon · night watch</text>
+  <text x="245" y="470" fill="#3f4d5e" font-family="ui-monospace, monospace" font-size="12" text-anchor="middle">position: still finding true north</text>
+</svg>
