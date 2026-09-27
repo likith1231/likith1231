@@ -210,47 +210,6 @@ def whoami(p: Profile, f: Fonts) -> str:
     return _svg(HALF, h, f"whoami: Likith Lochan, DevOps, Backend/Full-Stack and Applied AI. {p.contributions} contributions in the last year.", "".join(body))
 
 
-# ---- page: L's deduction ---------------------------------------------------------------
-
-def deduction(p: Profile, f: Fonts) -> str:
-    """L's line from the series, answered with real activity from the last 30 days."""
-    h = 1000
-    pct = round(100 * p.active30 / 30)
-    days = p.last30
-    top = max(days) or 1
-    letter = text_path(f.old_english, "L", 560)
-    number = text_path(f.gothic, f"{pct}%", 230)
-    body = [
-        _frame(HALF, h, "L  ·  DEDUCTION", "LAST 30 DAYS", f),
-        _at(letter, HALF - letter.width - 10, 760, INK, ' opacity="0.05"'),
-        _at(text_path(f.italic, "“The probability that", 40), PAD, 150, INK),
-        _at(text_path(f.italic, "likith1231 is Kira is…”", 40), PAD, 198, INK),
-        f'<g>{_at(number, PAD - 6, 470, RED)}{_appear(0.6, 12)}</g>',
-    ]
-    # One bar per day, tallest on the busiest day; empty days leave a faint tick.
-    x0, base, span, bw = PAD, 760, HALF - 2 * PAD, (HALF - 2 * PAD) / 30
-    for i, n in enumerate(days):
-        x = x0 + i * bw + 3
-        if n:
-            bh = 20 + 170 * n / top
-            delay = 1.0 + i * 0.03
-            body.append(
-                f'<rect x="{x:.1f}" y="{base - bh:.1f}" width="{bw - 6:.1f}" height="{bh:.1f}" fill="{RED}" opacity="{0.45 + 0.55 * n / top:.2f}">'
-                f'<animate attributeName="height" values="0;0;{bh:.1f}" keyTimes="0;{delay / (delay + 0.5):.3f};1" dur="{delay + 0.5:.2f}s" fill="freeze"/>'
-                f'<animate attributeName="y" values="{base};{base};{base - bh:.1f}" keyTimes="0;{delay / (delay + 0.5):.3f};1" dur="{delay + 0.5:.2f}s" fill="freeze"/></rect>'
-            )
-        else:
-            body.append(f'<rect x="{x:.1f}" y="{base - 3}" width="{bw - 6:.1f}" height="3" fill="{FAINT}"/>')
-    body.append(f'<line x1="{PAD}" y1="{base + 1}" x2="{HALF - PAD}" y2="{base + 1}" stroke="{EDGE}" stroke-width="1.5"/>')
-    body.append(_at(text_path(f.mono, "30 DAYS AGO", 12, tracking=0.2), PAD, base + 30, FAINT))
-    t = text_path(f.mono, "TODAY", 12, tracking=0.2)
-    body.append(_at(t, HALF - PAD - t.width, base + 30, FAINT))
-    cap = text_path(f.serif, f"Active on {p.active30} of the last 30 days. The deduction stands.", 26)
-    body.append(_at(cap, PAD, base + 88, MUTED))
-    body.append(_footer(HALF, h, p, f, "based on the contribution calendar"))
-    return _svg(HALF, h, f"The probability that likith1231 is Kira is {pct} percent: active on {p.active30} of the last 30 days", "".join(body))
-
-
 # ---- page: how to use it ---------------------------------------------------------------
 
 RULES = (
@@ -294,3 +253,61 @@ def button(label: str, f: Fonts) -> str:
         + _at(word, 40, 57, INK) + _at(arrow, w - 34 - arrow.width, 57, RED)
     )
     return _svg(w, h, label, body)
+
+
+# ---- pages: projects, written into the note --------------------------------------------
+
+@dataclass(frozen=True)
+class Project:
+    name: str
+    repo: str
+    cause: str
+    details: str
+    stack: str
+
+
+PROJECTS = (
+    Project("GhostOps", "ghostops", "Production incidents, patched on their own",
+            "Alertmanager fires; three CrewAI agents find the root cause, write a minimal patch, and prove it in a Docker sandbox under OPA before a PR is opened.",
+            "CrewAI · Claude API · FastAPI · Kubernetes · OPA"),
+    Project("AetherMed", "Aethermed", "Traffic spikes, absorbed by autoscaling",
+            "Clinic booking on Next.js, run like production: HPA scales 2 to 8 pods under k6 load, ArgoCD self-heals, Sentry and OTel trace it all.",
+            "Terraform · AWS EKS · ArgoCD · k6 · Sentry"),
+    Project("Sahayak", "sahayak", "The middlemen between farm and market",
+            "Farmers list produce by chatting with a Gemini agent that calls real tools; live mandi prices from Agmarknet, pgvector search, Razorpay checkout.",
+            "Next.js · FastAPI · Gemini · pgvector · Razorpay"),
+    Project("GreenCart", "greencart", "Empty carts",
+            "A MERN grocery store with a separate seller dashboard, Cloudinary product images, JWT cookie auth, and cash-on-delivery or Stripe checkout.",
+            "React · Express · MongoDB · Stripe · Tailwind"),
+)
+
+
+def entry(p: Profile, index: int, proj: Project, f: Fonts) -> str:
+    """One project as a Death Note entry: the name written in and struck through, then the
+    cause of death, the time (its last update, live from GitHub) and the details."""
+    h = 440
+    repo = next((r for r in p.repos if r.name.lower() == proj.repo.lower()), None)
+    when = f"{repo.pushed:%d %b %Y}".lstrip("0") if repo else "—"
+    lang = repo.language if repo and repo.language else ""
+    name = fit_path(f.hand, proj.name, 84, HALF - 2 * PAD)
+    struck = 0.2 + 1.4 + 0.2
+    body = [
+        _frame(HALF, h, f"DEATH NOTE  ·  ENTRY {index:02d}", "OPEN ↗", f),
+        _written(name, PAD, 152, INK, 0.2, 1.4),
+        f'<line x1="{PAD - 6}" y1="{152 - name.ascent * 0.32:.0f}" x2="{PAD + name.width + 8:.0f}" y2="{152 - name.ascent * 0.38:.0f}" '
+        f'stroke="{RED}" stroke-width="5" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="0">'
+        f'<animate attributeName="stroke-dashoffset" values="1;1;0" keyTimes="0;{struck / (struck + 0.5):.3f};1" dur="{struck + 0.5:.2f}s" fill="freeze"/></line>',
+    ]
+    rows = [("CAUSE", text_path(f.serif_bold, proj.cause, 25)),
+            ("TIME", text_path(f.serif, f"{when}" + (f"  ·  {lang}" if lang else ""), 25))]
+    y = 212
+    for label, value in rows:
+        body.append(_at(text_path(f.mono, label, 13, tracking=0.25), PAD, y - 4, MUTED) + _at(value, PAD + 130, y, INK if label == "CAUSE" else MUTED))
+        body.append(f'<line x1="{PAD}" y1="{y + 14}" x2="{HALF - PAD}" y2="{y + 14}" stroke="{RULE}" stroke-width="1.5"/>')
+        y += 46
+    body.append(_at(text_path(f.mono, "DETAILS", 13, tracking=0.25), PAD, y - 4, MUTED))
+    for k, line in enumerate(_wrap(f.serif, proj.details, 23, HALF - 2 * PAD - 130, 3)):
+        body.append(_at(text_path(f.serif, line, 23), PAD + 130, y + k * 30, MUTED))
+    stack = fit_path(f.mono, proj.stack, 14, HALF - 2 * PAD)
+    body.append(f'<line x1="{PAD}" y1="{h - 46}" x2="{HALF - PAD}" y2="{h - 46}" stroke="{RULE}" stroke-width="1.5"/>' + _at(stack, PAD, h - 20, RED))
+    return _svg(HALF, h, f"Death Note entry: {proj.name}. Cause: {proj.cause}. {proj.details}", "".join(body))
