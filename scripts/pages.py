@@ -10,7 +10,7 @@ from dataclasses import dataclass
 from datetime import date
 from html import escape
 
-from data import Profile, Repo
+from data import Profile
 from fontpaths import FontRef, Shaped, fit_path, text_path
 
 PAGE = "#0e0b0b"
@@ -149,46 +149,72 @@ def title_card(number: int, kanji: str, english: str, note: str, f: Fonts) -> st
     return _svg(WIDE, h, f"Episode {number}: {kanji}, {english}", body)
 
 
-# ---- page: identity --------------------------------------------------------------------
+# ---- page: identity -------------------------------------------------------------------
 
-def identity(p: Profile, f: Fonts) -> str:
-    h = 900
-    name = text_path(f.hand, "Likith Lochan", 104)
-    rows = [
-        ("CONTRIBUTIONS", f"{p.contributions:,}", "in the last year"),
-        ("CURRENT STREAK", str(p.current_streak), "day" if p.current_streak == 1 else "days"),
-        ("LONGEST STREAK", str(p.longest_streak), "days, this year"),
-        ("PUBLIC REPOS", str(p.repo_count), "written so far"),
-        ("STARS", str(p.stars), "across them"),
-        ("WRITING SINCE", str(p.since), "on GitHub"),
-    ]
+def _mono(f: Fonts, text: str, size: float = 19) -> Shaped:
+    return text_path(f.mono, text, size)
+
+
+def whoami(p: Profile, f: Fonts) -> str:
+    """$ whoami: role, stack and proof as key/value groups, then status and a prompt."""
+    h = 1000
+    groups = (
+        (
+            ("role", "DevOps · Backend/Full-Stack · Applied AI"),
+            ("focus", "AIOps · SRE · RAG systems"),
+            ("based", "Bengaluru, India · UTC+5:30"),
+            ("edu", "B.E. CSE · APS College of Engg."),
+        ),
+        (
+            ("langs", "Python · TypeScript · JavaScript · Java"),
+            ("backend", "FastAPI · Node/Express · Socket.IO"),
+            ("frontend", "React · Next.js · Tailwind · Three.js"),
+            ("ai", "Claude · Gemini · CrewAI · pgvector"),
+            ("infra", "Kubernetes · Terraform · EKS · ArgoCD"),
+            ("observe", "Prometheus · Grafana · OTel · Sentry"),
+            ("ship", "Docker · GitHub Actions · Vault · k6"),
+        ),
+        (
+            ("activity", f"{p.contributions:,} contributions · {p.current_streak}-day streak"),
+            ("proof", "GhostOps: 2 incidents fixed end to end"),
+        ),
+    )
     body = [
-        _frame(HALF, h, "DEATH NOTE  ·  PAGE 01", "IDENTITY", f),
-        _written(name, PAD, 186, INK, 0.2, 2.2),
-        f'<rect x="{PAD}" y="210" width="130" height="3" fill="{RED}"/>',
-        _at(text_path(f.serif_bold, "DevOps · Backend/Full-Stack · Applied AI", 30), PAD, 262, INK),
-        _at(text_path(f.italic, "CS undergraduate, APS College of Engineering", 26), PAD, 298, MUTED),
+        _frame(HALF, h, "~/WHOAMI", "ZSH", f),
+        _at(_mono(f, "$"), PAD, 108, RED) + _at(_mono(f, "whoami"), PAD + 24, 108, INK),
+        _written(text_path(f.gothic, "Likith Lochan", 64), PAD, 186, INK, 0.2, 1.8),
     ]
-    y = 380
-    for i, (label, value, unit) in enumerate(rows):
-        lab = text_path(f.mono, label, 13, tracking=0.2)
-        val = text_path(f.hand, value, 58)
-        un = text_path(f.italic, unit, 24)
-        row = (
-            f'<line x1="{PAD}" y1="{y + 14}" x2="{HALF - PAD}" y2="{y + 14}" stroke="{RULE}" stroke-width="1.5"/>'
-            + _at(lab, PAD, y - 6, MUTED) + _at(val, 300, y + 4, RED if i == 0 else INK) + _at(un, 300 + val.width + 16, y, MUTED)
-        )
-        body.append(f"<g>{row}{_appear(1.6 + i * 0.12)}</g>")
-        y += 70
-    body.append(_footer(HALF, h, p, f, "github.com/likith1231"))
-    return _svg(HALF, h, f"Likith Lochan: {p.contributions} contributions in the last year, current streak {p.current_streak} days", "".join(body))
+    y, delay = 250, 1.0
+    for g, group in enumerate(groups):
+        body.append(f'<line x1="{PAD}" y1="{y - 24}" x2="{HALF - PAD}" y2="{y - 24}" stroke="{RULE}" stroke-width="1.5"/>')
+        y += 14
+        for key, value in group:
+            row = _at(_mono(f, key), PAD, y, MUTED) + _at(_mono(f, value), PAD + 150, y, RED if key == "activity" else INK)
+            body.append(f"<g>{row}{_appear(delay, 0)}</g>")
+            y += 38
+            delay += 0.07
+        y += 22
+    status = _mono(f, "open to DevOps/Cloud · Backend · SDE · AI/ML")
+    body.append(
+        f'<g><circle cx="{PAD + 6}" cy="{y - 6}" r="6" fill="{RED}"><animate attributeName="opacity" values="1;0.3;1" dur="2.2s" repeatCount="indefinite"/></circle>'
+        + _at(status, PAD + 24, y, RED) + f"{_appear(delay, 0)}</g>"
+    )
+    y += 46
+    body.append(
+        f"<g>{_at(_mono(f, '$'), PAD, y, RED)}"
+        f'<rect x="{PAD + 24}" y="{y - 18}" width="11" height="22" fill="{INK}">'
+        '<animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.5;0.5;1" dur="1.1s" repeatCount="indefinite"/></rect>'
+        f"{_appear(delay + 0.1, 0)}</g>"
+    )
+    body.append(_footer(HALF, h, p, f, f"{p.contributions:,} contributions in the last year"))
+    return _svg(HALF, h, f"whoami: Likith Lochan, DevOps, Backend/Full-Stack and Applied AI. {p.contributions} contributions in the last year.", "".join(body))
 
 
 # ---- page: L's deduction ---------------------------------------------------------------
 
 def deduction(p: Profile, f: Fonts) -> str:
     """L's line from the series, answered with real activity from the last 30 days."""
-    h = 900
+    h = 1000
     pct = round(100 * p.active30 / 30)
     days = p.last30
     top = max(days) or 1
@@ -196,13 +222,13 @@ def deduction(p: Profile, f: Fonts) -> str:
     number = text_path(f.gothic, f"{pct}%", 230)
     body = [
         _frame(HALF, h, "L  ·  DEDUCTION", "LAST 30 DAYS", f),
-        _at(letter, HALF - letter.width - 10, 700, INK, ' opacity="0.05"'),
+        _at(letter, HALF - letter.width - 10, 760, INK, ' opacity="0.05"'),
         _at(text_path(f.italic, "“The probability that", 40), PAD, 150, INK),
         _at(text_path(f.italic, "likith1231 is Kira is…”", 40), PAD, 198, INK),
-        f'<g>{_at(number, PAD - 6, 440, RED)}{_appear(0.6, 12)}</g>',
+        f'<g>{_at(number, PAD - 6, 470, RED)}{_appear(0.6, 12)}</g>',
     ]
     # One bar per day, tallest on the busiest day; empty days leave a faint tick.
-    x0, base, span, bw = PAD, 690, HALF - 2 * PAD, (HALF - 2 * PAD) / 30
+    x0, base, span, bw = PAD, 760, HALF - 2 * PAD, (HALF - 2 * PAD) / 30
     for i, n in enumerate(days):
         x = x0 + i * bw + 3
         if n:
@@ -223,64 +249,6 @@ def deduction(p: Profile, f: Fonts) -> str:
     body.append(_at(cap, PAD, base + 88, MUTED))
     body.append(_footer(HALF, h, p, f, "based on the contribution calendar"))
     return _svg(HALF, h, f"The probability that likith1231 is Kira is {pct} percent: active on {p.active30} of the last 30 days", "".join(body))
-
-
-# ---- page: languages -------------------------------------------------------------------
-
-def names(p: Profile, f: Fonts) -> str:
-    """Top languages across public repos, written in like names, each with its share."""
-    h = 470
-    langs = p.languages[:6]
-    top = langs[0][2] if langs else 1
-    col_w = (WIDE - 2 * PAD - 60) / 2
-    body = [
-        _frame(WIDE, h, "DEATH NOTE  ·  PAGE 02", "BY SHARE OF CODE, ACROSS PUBLIC REPOS", f),
-        _at(text_path(f.gothic, "Names written in this note", 50), PAD, 124, INK),
-    ]
-    for i, (lang, color, share) in enumerate(langs):
-        col, row = divmod(i, 3)
-        x = PAD + col * (col_w + 60)
-        y = 220 + row * 84
-        num = text_path(f.gothic, ["I", "II", "III", "IV", "V", "VI"][i], 34)
-        nm = fit_path(f.hand, lang, 58, 300)
-        pc = text_path(f.mono, f"{share * 100:.1f}%", 18, tracking=0.05)
-        bar_x = x + 70 + 320
-        bar_w = (col_w - 70 - 320 - pc.width - 24) * share / top
-        delay = 0.8 + i * 0.15
-        body.append(
-            _at(num, x, y + 6, RED) + _written(nm, x + 70, y + 10, INK, 0.3 + i * 0.15, 1.0)
-            + f'<line x1="{bar_x:.1f}" y1="{y - 4}" x2="{bar_x + bar_w:.1f}" y2="{y - 4}" stroke="{RED}" stroke-width="4" stroke-linecap="round" '
-            f'pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="0">'
-            f'<animate attributeName="stroke-dashoffset" values="1;1;0" keyTimes="0;{delay / (delay + 0.8):.3f};1" dur="{delay + 0.8:.2f}s" fill="freeze"/></line>'
-            + _at(pc, bar_x + bar_w + 18, y + 2, MUTED)
-            + f'<line x1="{x}" y1="{y + 26}" x2="{x + col_w}" y2="{y + 26}" stroke="{RULE}" stroke-width="1.5"/>'
-        )
-    body.append(_footer(WIDE, h, p, f, f"{len(p.languages)} languages in all"))
-    label = ", ".join(f"{n} {s * 100:.0f}%" for n, _, s in langs)
-    return _svg(WIDE, h, f"Top languages: {label}", "".join(body))
-
-
-# ---- pages: recent repositories --------------------------------------------------------
-
-def recent(p: Profile, repo: Repo, index: int, f: Fonts) -> str:
-    h = 350
-    name = fit_path(f.hand, repo.name, 70, HALF - 2 * PAD)
-    desc = _wrap(f.serif, repo.description or "No description yet.", 25, HALF - 2 * PAD, 2)
-    body = [
-        _frame(HALF, h, f"RECENT PAGE {index:02d}", f"UPDATED {_ago(p, repo.pushed).upper()}", f),
-        _written(name, PAD, 146, INK, 0.2, 1.2),
-    ]
-    body += [_at(text_path(f.serif, line, 25), PAD, 196 + i * 32, MUTED) for i, line in enumerate(desc)]
-    y = h - 76
-    lang = text_path(f.mono, repo.language or "—", 15, tracking=0.1)
-    stars = text_path(f.mono, f"STARS {repo.stars}", 15, tracking=0.1)
-    open_ = text_path(f.mono, "OPEN ↗", 15, tracking=0.2)
-    body.append(
-        f'<circle cx="{PAD + 7}" cy="{y - 5}" r="7" fill="{repo.color}"/>' + _at(lang, PAD + 24, y, INK)
-        + _at(stars, PAD + 24 + lang.width + 30, y, MUTED) + _at(open_, HALF - PAD - open_.width, y, RED)
-    )
-    body.append(_footer(HALF, h, p, f))
-    return _svg(HALF, h, f"{repo.name}: {repo.description} ({repo.language}, {repo.stars} stars)", "".join(body))
 
 
 # ---- page: how to use it ---------------------------------------------------------------
