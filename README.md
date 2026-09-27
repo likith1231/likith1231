@@ -3,9 +3,13 @@
 
 <img src="./assets/banner.svg" width="100%" alt="Likith Lochan. DevOps, Backend/Full-Stack, Applied AI. Drawn as a manga page: Ryuk against a red moon, L's letter on a monitor, and the Death Note falling.">
 
+<img src="https://media.tenor.com/tKMTWPmmGaUAAAAC/ryuk-death-note.gif" width="32%" alt="Ryuk flying past the moon"> <img src="https://media.tenor.com/F9Yh5L2g3AYAAAAC/light-yagami.gif" width="32%" alt="Light Yagami's smile, a red glint in his eye"> <img src="https://media.tenor.com/rW61ogX4gj8AAAAC/ryuk-death-note.gif" width="32%" alt="Ryuk's glowing red eyes">
+
 <br><br>
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="./assets/header-whoami-dark.svg"><img src="./assets/header-whoami-light.svg" width="100%" alt="File 01: 正体, Identity"></picture>
+
+<img src="https://media.tenor.com/DiQoAtvjMzoAAAAC/death-note-l-death-note.gif" width="49%" alt="L staring out of the dark"> <img src="https://media.tenor.com/fcUrOX_xwEgAAAAC/death-note-anime.gif" width="49%" alt="Ryuk looming behind Light at school">
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="./assets/note-dark.svg"><img src="./assets/note-light.svg" width="49%" alt="ASCII art: the Death Note, bleeding, gripped by a shinigami's claw"></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="./assets/whoami-dark.svg"><img src="./assets/whoami-light.svg" width="49%" alt="Role, stack, and what I have shipped"></picture>
 
@@ -13,11 +17,15 @@
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="./assets/header-rules-dark.svg"><img src="./assets/header-rules-light.svg" width="100%" alt="File 02: 掟, The Rules"></picture>
 
+<img src="https://media.tenor.com/32H8OJbPIlAAAAAC/death-note-light.gif" width="49%" alt="Light writing in the Death Note"> <img src="https://media.tenor.com/1ybUFYQpNDgAAAAC/death-note-light-yagami.gif" width="49%" alt="The pen moving across the note">
+
 <picture><source media="(prefers-color-scheme: dark)" srcset="./assets/rules-dark.svg"><img src="./assets/rules-light.svg" width="100%" alt="How to use it: ship it, then armor it; automate the boring; verify before trusting"></picture>
 
 <br><br>
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="./assets/header-activity-dark.svg"><img src="./assets/header-activity-light.svg" width="100%" alt="File 03: 記録, The Record"></picture>
+
+<img src="https://media.tenor.com/llfBQe-pZjIAAAAC/joblife-jl.gif" width="49%" alt="Light's shadowed, red-eyed laugh"> <img src="https://media.tenor.com/SEy40M8j7k8AAAAC/ryuk-death-note.gif" width="49%" alt="Ryuk lit red">
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/likith1231/likith1231/output/github-snake-dark.svg" />
@@ -30,5 +38,11 @@
 <picture><source media="(prefers-color-scheme: dark)" srcset="./assets/header-contact-dark.svg"><img src="./assets/header-contact-light.svg" width="100%" alt="File 04: 接触, Contact"></picture>
 
 <a href="https://www.linkedin.com/in/likith-lochan-2ab93b290"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/link-linkedin-dark.svg"><img src="./assets/link-linkedin-light.svg" width="200" alt="LinkedIn"></picture></a> <a href="mailto:likithlu3@gmail.com"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/link-email-dark.svg"><img src="./assets/link-email-light.svg" width="200" alt="Email"></picture></a> <a href="https://github.com/likith1231?tab=repositories"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/link-github-dark.svg"><img src="./assets/link-github-light.svg" width="200" alt="All repos"></picture></a>
+
+<br><br>
+
+<img src="https://media.tenor.com/0S-qY1MlqDAAAAAC/death-note-anime.gif" width="46%" alt="Ryuk perched on a tower at sunset">
+
+<sub><i>"Humans are so interesting." — Ryuk</i></sub>
 
 </div>

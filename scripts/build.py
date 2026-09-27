@@ -17,7 +17,7 @@ import ascii_card
 import banner
 import cards
 import note
-from content import LINKS, USER
+from content import CLIPS, LINKS, USER
 from fontpaths import FontRef
 from theme import THEMES
 
@@ -105,6 +105,11 @@ def themed(name: str, alt: str, width: str = "100%") -> str:
     )
 
 
+def scenes(*names: str, width: str = "32%") -> str:
+    """A row of anime clips, side by side. They share one line: GitHub breaks on newlines."""
+    return " ".join(f'<img src="{CLIPS[n][0]}" width="{width}" alt="{CLIPS[n][1]}">' for n in names)
+
+
 def readme() -> str:
     buttons = " ".join(
         f'<a href="{LINKS[key]}">{themed(f"link-{key}", label, "200")}</a>' for key, label in BUTTONS
@@ -121,9 +126,13 @@ def readme() -> str:
 
 <img src="./assets/banner.svg" width="100%" alt="Likith Lochan. DevOps, Backend/Full-Stack, Applied AI. Drawn as a manga page: Ryuk against a red moon, L's letter on a monitor, and the Death Note falling.">
 
+{scenes("ryuk-moon", "light-smile", "ryuk-eyes")}
+
 <br><br>
 
 {themed("header-whoami", "File 01: 正体, Identity")}
+
+{scenes("l-stare", "ryuk-school", width="49%")}
 
 {themed("note", "ASCII art: the Death Note, bleeding, gripped by a shinigami's claw", "49%")} {themed("whoami", "Role, stack, and what I have shipped", "49%")}
 
@@ -131,11 +140,15 @@ def readme() -> str:
 
 {themed("header-rules", "File 02: 掟, The Rules")}
 
+{scenes("light-writing", "pen", width="49%")}
+
 {themed("rules", "How to use it: ship it, then armor it; automate the boring; verify before trusting")}
 
 <br><br>
 
 {themed("header-activity", "File 03: 記録, The Record")}
+
+{scenes("light-laugh", "ryuk-red", width="49%")}
 
 {snake}
 
@@ -144,6 +157,12 @@ def readme() -> str:
 {themed("header-contact", "File 04: 接触, Contact")}
 
 {buttons}
+
+<br><br>
+
+<img src="{CLIPS["ryuk-tower"][0]}" width="46%" alt="{CLIPS["ryuk-tower"][1]}">
+
+<sub><i>"Humans are so interesting." — Ryuk</i></sub>
 
 </div>
 """
