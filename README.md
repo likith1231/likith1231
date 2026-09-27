@@ -13,9 +13,9 @@
 
 <img src="./assets/ep-03.svg" width="100%" alt="Episode 03: Record">
 
-<a href="https://github.com/likith1231/tuf-solutions"><img src="./assets/recent-1.svg" width="49%" alt="tuf-solutions: Java solutions to the TUF A2Z sheet, one problem a day, automated."></a> <a href="https://github.com/likith1231/greencart"><img src="./assets/recent-2.svg" width="49%" alt="greencart: Grocery store with a seller dashboard, Stripe checkout and Cloudinary images."></a>
+<a href="https://github.com/likith1231/tuf-solutions"><img src="./assets/recent-1.svg" width="49%" alt="tuf-solutions: "></a> <a href="https://github.com/likith1231/greencart"><img src="./assets/recent-2.svg" width="49%" alt="greencart: "></a>
 
-<a href="https://github.com/likith1231/Aethermed"><img src="./assets/recent-3.svg" width="49%" alt="Aethermed: Clinic booking on Next.js, wrapped in EKS, ArgoCD, HPA and OpenTelemetry."></a> <a href="https://github.com/likith1231/ghostops"><img src="./assets/recent-4.svg" width="49%" alt="ghostops: Autonomous AIOps: detects an incident, patches it, proves it, opens the PR."></a>
+<a href="https://github.com/likith1231/Aethermed"><img src="./assets/recent-3.svg" width="49%" alt="Aethermed: "></a> <a href="https://github.com/likith1231/ghostops"><img src="./assets/recent-4.svg" width="49%" alt="ghostops: "></a>
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/likith1231/likith1231/output/github-snake-dark.svg"><img alt="Contribution snake" src="https://raw.githubusercontent.com/likith1231/likith1231/output/github-snake.svg" width="100%"></picture>
 
