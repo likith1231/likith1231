@@ -18,9 +18,11 @@ jobs:
         uses: Platane/snk/svg-only@v3
         with:
           github_user_name: likith1231
+          # Death Note palette: contribution cells in rising shades of blood red,
+          # a bone-white snake on dark, an ink-black snake on light.
           outputs: |
-            dist/github-snake.svg
-            dist/github-snake-dark.svg?palette=github-dark
+            dist/github-snake.svg?color_snake=#161312&color_dots=#efe8dc,#f2c4bf,#e07a7c,#c0282f,#7a0c12
+            dist/github-snake-dark.svg?color_snake=#efe6d8&color_dots=#161b22,#3b0a0d,#6e1016,#a5161f,#ff3b3f
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
