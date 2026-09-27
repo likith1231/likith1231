@@ -5,17 +5,23 @@
 
 <img src="./assets/ep-01.svg" width="100%" alt="Episode 01: Identity">
 
-<img src="./assets/deduction.svg" width="49%" alt="L's deduction: activity over the last 30 days"> <img src="./assets/whoami.svg" width="49%" alt="whoami: role, stack and what I have shipped">
+<img src="./assets/note.svg" width="49%" alt="ASCII art: the Death Note, bleeding from its title, gripped by a shinigami's claw"> <img src="./assets/whoami.svg" width="49%" alt="whoami: role, stack and what I have shipped">
 
-<img src="./assets/ep-02.svg" width="100%" alt="Episode 02: Record">
+<img src="./assets/ep-02.svg" width="100%" alt="Episode 02: Names">
+
+<a href="https://github.com/likith1231/ghostops"><img src="./assets/entry-1.svg" width="49%" alt="GhostOps: Production incidents, patched on their own"></a> <a href="https://github.com/likith1231/Aethermed"><img src="./assets/entry-2.svg" width="49%" alt="AetherMed: Traffic spikes, absorbed by autoscaling"></a>
+
+<a href="https://github.com/likith1231/sahayak"><img src="./assets/entry-3.svg" width="49%" alt="Sahayak: The middlemen between farm and market"></a> <a href="https://github.com/likith1231/greencart"><img src="./assets/entry-4.svg" width="49%" alt="GreenCart: Empty carts"></a>
+
+<img src="./assets/ep-03.svg" width="100%" alt="Episode 03: Record">
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/likith1231/likith1231/output/github-snake-dark.svg"><img alt="Contribution snake" src="https://raw.githubusercontent.com/likith1231/likith1231/output/github-snake.svg" width="100%"></picture>
 
-<img src="./assets/ep-03.svg" width="100%" alt="Episode 03: Rules">
+<img src="./assets/ep-04.svg" width="100%" alt="Episode 04: Rules">
 
 <img src="./assets/rules.svg" width="100%" alt="How to use it: ship it, then armor it; automate the boring; verify before trusting">
 
-<img src="./assets/ep-04.svg" width="100%" alt="Episode 04: Contact">
+<img src="./assets/ep-05.svg" width="100%" alt="Episode 05: Contact">
 
 <a href="https://www.linkedin.com/in/likith-lochan-2ab93b290"><img src="./assets/link-linkedin.svg" width="30%" alt="LinkedIn"></a> <a href="mailto:likithlu3@gmail.com"><img src="./assets/link-email.svg" width="30%" alt="Email"></a> <a href="https://github.com/likith1231?tab=repositories"><img src="./assets/link-github.svg" width="30%" alt="GitHub"></a>
 
