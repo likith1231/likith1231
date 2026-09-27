@@ -1,18 +1,17 @@
-# Keeps the Death Note cards fresh: rebuilds every asset and the README from
-# scripts/content.py, with the whoami card showing the current contribution count
-# and date. The contribution snake has its own workflow (snake.yml), left as it was.
+# Rebuilds the profile from live GitHub data: contributions, streaks, languages and the
+# latest repos. The contribution snake has its own workflow (snake.yml).
 name: Refresh profile
 
 on:
   schedule:
-    - cron: "0 */12 * * *"
+    - cron: "17 */6 * * *"
   workflow_dispatch:
   push:
     branches: [main]
     paths: ["scripts/**", ".github/workflows/refresh.yml"]
 
 jobs:
-  cards:
+  build:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -24,7 +23,7 @@ jobs:
           cache: pip
           cache-dependency-path: scripts/requirements.txt
       - run: pip install -r scripts/requirements.txt
-      - name: Rebuild the cards
+      - name: Rebuild the pages
         run: python scripts/build.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -34,6 +33,6 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add assets README.md
           if ! git diff --cached --quiet; then
-            git commit -m "chore: refresh profile cards [skip ci]"
+            git commit -m "chore: refresh profile [skip ci]"
             git push
           fi
