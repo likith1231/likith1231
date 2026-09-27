@@ -5,7 +5,7 @@
 
 <img src="./assets/ep-01.svg" width="100%" alt="Episode 01: Identity">
 
-<img src="./assets/skull.svg" width="49%" alt="ASCII art: a cracked skull bleeding from burning eye sockets, counting down to death"> <img src="./assets/whoami.svg" width="49%" alt="whoami: role, stack and what I have shipped">
+<img src="./assets/note.svg" width="49%" alt="ASCII art: the Death Note, bleeding from its title, gripped by a shinigami's claw"> <img src="./assets/whoami.svg" width="49%" alt="whoami: role, stack and what I have shipped">
 
 <img src="./assets/ep-02.svg" width="100%" alt="Episode 02: Names">
 

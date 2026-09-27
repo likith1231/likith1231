@@ -12,8 +12,8 @@ from pathlib import Path
 import ascii_card
 import banner
 import data
+import note
 import pages
-import skull
 from fontpaths import FontRef
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -77,7 +77,7 @@ def readme(p: data.Profile) -> str:
 
 {img("ep-01", "Episode 01: Identity")}
 
-{img("skull", "ASCII art: a cracked skull bleeding from burning eye sockets, counting down to death", "49%")} {img("whoami", "whoami: role, stack and what I have shipped", "49%")}
+{img("note", "ASCII art: the Death Note, bleeding from its title, gripped by a shinigami's claw", "49%")} {img("whoami", "whoami: role, stack and what I have shipped", "49%")}
 
 {img("ep-02", "Episode 02: Names")}
 
@@ -114,12 +114,12 @@ def main() -> None:
         ("掟", "Rules", "How to use it."),
         ("接触", "Contact", "Summon me."),
     )
-    for i, (kanji, english, note) in enumerate(episodes, start=1):
-        write(f"ep-{i:02d}", pages.title_card(i, kanji, english, note, f))
+    for i, (kanji, english, line) in enumerate(episodes, start=1):
+        write(f"ep-{i:02d}", pages.title_card(i, kanji, english, line, f))
     write("whoami", pages.whoami(p, f))
-    write("skull", ascii_card.render(
-        f, *skull.render(), "LIKITH@DEATHNOTE  ·  ~/RULE-I", "the human whose name is written in this note shall die",
-        "ASCII art: a cracked skull bleeding from burning eye sockets, counting down to death", countdown=True))
+    write("note", ascii_card.render(
+        f, *note.arrays(f.serif_bold.path), "LIKITH@DEATHNOTE  ·  ~/DEATH-NOTE", "the human whose name is written in this note shall die",
+        "ASCII art: the Death Note, bleeding from its title, gripped by a shinigami's claw"))
     for i, proj in enumerate(pages.PROJECTS, start=1):
         write(f"entry-{i}", pages.entry(p, i, proj, f))
     write("rules", pages.rules(p, f))
