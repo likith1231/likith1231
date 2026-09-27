@@ -1,4 +1,4 @@
-"""One palette per GitHub theme. The notebook: black cover, parchment pages, and red ink."""
+"""One palette per GitHub theme. Dark is the note's black cover; light is a printed manga page."""
 
 from dataclasses import dataclass
 
@@ -16,6 +16,9 @@ class Theme:
     bone: str      # parchment, the second voice in diagrams
     live: str      # "still breathing" dot
     apple: str     # Ryuk's apple
+    frame: str     # manga panel borders and title strips
+    tone: str      # screentone dots
+    streak: str    # speed lines
 
 
 DARK = Theme(
@@ -30,12 +33,15 @@ DARK = Theme(
     bone="#c9b99a",
     live="#e0303a",
     apple="#ff3b3f",
+    frame="#d9cfbf",
+    tone="#3a2626",
+    streak="#5a4a44",
 )
 
 LIGHT = Theme(
     name="light",
     page="#ffffff",
-    surface="#fbf8f1",
+    surface="#fdfbf6",
     border="#e7dfd0",
     ink="#161312",
     muted="#6e645b",
@@ -44,6 +50,9 @@ LIGHT = Theme(
     bone="#8a7550",
     live="#b0141d",
     apple="#c8161f",
+    frame="#111010",
+    tone="#cfc6b8",
+    streak="#b9ad9c",
 )
 
 THEMES = (DARK, LIGHT)

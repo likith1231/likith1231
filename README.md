@@ -5,19 +5,19 @@
 
 <br><br>
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="./assets/header-whoami-dark.svg"><img src="./assets/header-whoami-light.svg" width="100%" alt="$ whoami"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="./assets/header-whoami-dark.svg"><img src="./assets/header-whoami-light.svg" width="100%" alt="File 01: 正体, Identity"></picture>
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="./assets/note-dark.svg"><img src="./assets/note-light.svg" width="49%" alt="ASCII art: the Death Note, bleeding, gripped by a shinigami's claw"></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="./assets/whoami-dark.svg"><img src="./assets/whoami-light.svg" width="49%" alt="Role, stack, and what I have shipped"></picture>
 
 <br><br>
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="./assets/header-rules-dark.svg"><img src="./assets/header-rules-light.svg" width="100%" alt="$ cat how_to_use_it.md"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="./assets/header-rules-dark.svg"><img src="./assets/header-rules-light.svg" width="100%" alt="File 02: 掟, The Rules"></picture>
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="./assets/rules-dark.svg"><img src="./assets/rules-light.svg" width="100%" alt="How to use it: ship it, then armor it; automate the boring; verify before trusting"></picture>
 
 <br><br>
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="./assets/header-activity-dark.svg"><img src="./assets/header-activity-light.svg" width="100%" alt="$ ./contributions.sh"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="./assets/header-activity-dark.svg"><img src="./assets/header-activity-light.svg" width="100%" alt="File 03: 記録, The Record"></picture>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/likith1231/likith1231/output/github-snake-dark.svg" />
@@ -27,7 +27,7 @@
 
 <br><br>
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="./assets/header-contact-dark.svg"><img src="./assets/header-contact-light.svg" width="100%" alt="$ ./summon.sh"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="./assets/header-contact-dark.svg"><img src="./assets/header-contact-light.svg" width="100%" alt="File 04: 接触, Contact"></picture>
 
 <a href="https://www.linkedin.com/in/likith-lochan-2ab93b290"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/link-linkedin-dark.svg"><img src="./assets/link-linkedin-light.svg" width="200" alt="LinkedIn"></picture></a> <a href="mailto:likithlu3@gmail.com"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/link-email-dark.svg"><img src="./assets/link-email-light.svg" width="200" alt="Email"></picture></a> <a href="https://github.com/likith1231?tab=repositories"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/link-github-dark.svg"><img src="./assets/link-github-light.svg" width="200" alt="All repos"></picture></a>
 

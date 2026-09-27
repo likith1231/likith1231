@@ -17,7 +17,7 @@ import ascii_card
 import banner
 import cards
 import note
-from content import HOST, LINKS, USER
+from content import LINKS, USER
 from fontpaths import FontRef
 from theme import THEMES
 
@@ -34,11 +34,12 @@ FONT_FILES = {
     "JetBrainsMono[wght].ttf": "ofl/jetbrainsmono/JetBrainsMono%5Bwght%5D.ttf",
     "YujiBoku-Regular.ttf": "ofl/yujiboku/YujiBoku-Regular.ttf",
 }
+# Section headers, drawn as manga chapter titles: (kanji, English title).
 SECTIONS = {
-    "whoami": "whoami",
-    "rules": "cat how_to_use_it.md",
-    "activity": "./contributions.sh",
-    "contact": "./summon.sh",
+    "whoami": ("正体", "Identity"),
+    "rules": ("掟", "The Rules"),
+    "activity": ("記録", "The Record"),
+    "contact": ("接触", "Contact"),
 }
 BUTTONS = (("linkedin", "LinkedIn"), ("email", "Email"), ("github", "All repos"))
 
@@ -122,25 +123,25 @@ def readme() -> str:
 
 <br><br>
 
-{themed("header-whoami", "$ whoami")}
+{themed("header-whoami", "File 01: 正体, Identity")}
 
 {themed("note", "ASCII art: the Death Note, bleeding, gripped by a shinigami's claw", "49%")} {themed("whoami", "Role, stack, and what I have shipped", "49%")}
 
 <br><br>
 
-{themed("header-rules", "$ cat how_to_use_it.md")}
+{themed("header-rules", "File 02: 掟, The Rules")}
 
 {themed("rules", "How to use it: ship it, then armor it; automate the boring; verify before trusting")}
 
 <br><br>
 
-{themed("header-activity", "$ ./contributions.sh")}
+{themed("header-activity", "File 03: 記録, The Record")}
 
 {snake}
 
 <br><br>
 
-{themed("header-contact", "$ ./summon.sh")}
+{themed("header-contact", "File 04: 接触, Contact")}
 
 {buttons}
 
@@ -162,13 +163,14 @@ def main() -> None:
                          "ASCII art: the Death Note, bleeding, gripped by a shinigami's claw")
     for theme in THEMES:
         suffix = f"-{theme.name}.svg"
-        write("note" + suffix, ascii_card.render(theme, art, HOST, cards.emblem(theme, 30, 23)))
+        frame = cards.panel(theme, ascii_card.WIDTH, ascii_card.HEIGHT, "SHINIGAMI REALM · THE NOTE", f"{ascii_card.COLS}×{ascii_card.ROWS}")
+        write("note" + suffix, ascii_card.render(theme, art, frame))
         write("whoami" + suffix, cards.whoami(theme, fonts, f"updated {today}", footer_right))
         write("rules" + suffix, cards.rules(theme, fonts))
-        for key, command in SECTIONS.items():
-            write(f"header-{key}{suffix}", cards.header(theme, command))
+        for number, (key, (kanji, english)) in enumerate(SECTIONS.items(), start=1):
+            write(f"header-{key}{suffix}", cards.header(theme, fonts, number, len(SECTIONS), kanji, english))
         for key, label in BUTTONS:
-            write(f"link-{key}{suffix}", cards.link_button(theme, label))
+            write(f"link-{key}{suffix}", cards.link_button(theme, fonts, label))
     (ROOT / "README.md").write_text(readme(), encoding="utf-8")
     print(f"built {len(list(ASSETS.glob('*.svg')))} svgs and README.md")
 

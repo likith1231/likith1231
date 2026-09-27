@@ -14,7 +14,7 @@ from PIL import Image
 from theme import MONO, Theme, mix
 
 WIDTH, HEIGHT = 860, 1000
-TITLE_H = 44
+TITLE_H = 48
 COLS, ROWS = 110, 74
 CELL_W, CELL_H = 6.3, 12.0
 FONT_SIZE = 10.5
@@ -111,7 +111,7 @@ def _row_svg(row: list[Cell], y: float, x0: float) -> str:
     )
 
 
-def render(theme: Theme, art: Art, host: str, emblem: str) -> str:
+def render(theme: Theme, art: Art, frame: str) -> str:
     ink = [mix(theme.faint, theme.ink, (i / (TONES - 1)) ** 0.85) for i in range(TONES)]
     red_floor = mix(theme.surface, theme.apple, 0.35)
     red = [mix(red_floor, theme.apple, (i / (TONES - 1)) ** 0.8) for i in range(TONES)]
@@ -135,18 +135,14 @@ def render(theme: Theme, art: Art, host: str, emblem: str) -> str:
     <stop offset="1" stop-color="{theme.surface}"/>
   </linearGradient>
 </defs>
-<rect x="0.5" y="0.5" width="{WIDTH - 1}" height="{HEIGHT - 1}" rx="14" fill="{theme.surface}" stroke="{theme.border}"/>
-<line x1="1" y1="{TITLE_H}" x2="{WIDTH - 1}" y2="{TITLE_H}" stroke="{theme.border}"/>
-{emblem}
-<text x="46" y="27" font-family="{MONO}" font-size="12.5" fill="{theme.muted}">{escape(host)} <tspan fill="{theme.faint}">·</tspan> {escape(art.title)}</text>
-<text x="{WIDTH - 22}" y="27" font-family="{MONO}" font-size="12.5" fill="{theme.muted}" text-anchor="end">{COLS}×{ROWS}</text>
+{frame}
 <g font-family="{MONO}" font-size="{FONT_SIZE}">{rows_svg}</g>
 <g transform="translate(0 {end})">
-  <rect x="1" y="0" width="{WIDTH - 2}" height="{art_h + 90:.1f}" fill="url(#curtain)"/>
+  <rect x="4" y="0" width="{WIDTH - 8}" height="{art_h + 90:.1f}" fill="url(#curtain)"/>
   <rect x="40" y="10" width="{WIDTH - 80}" height="1.6" fill="{theme.accent}" opacity="0.8"/>
   <animateTransform attributeName="transform" type="translate" values="0 {start:.1f};0 {end}" dur="{REVEAL_SECONDS}s" fill="freeze" {spline}/>
 </g>
-<line x1="22" y1="{HEIGHT - 44}" x2="{WIDTH - 22}" y2="{HEIGHT - 44}" stroke="{theme.border}"/>
+<line x1="22" y1="{HEIGHT - 44}" x2="{WIDTH - 22}" y2="{HEIGHT - 44}" stroke="{theme.frame}" stroke-width="1.5" opacity="0.5"/>
 <text x="22" y="{HEIGHT - 18}" font-family="{MONO}" font-size="12" fill="{theme.muted}">{escape(art.caption)}</text>
 <text x="{WIDTH - 22}" y="{HEIGHT - 18}" font-family="{MONO}" font-size="12" fill="{theme.muted}" text-anchor="end">{glyph_count:,} glyphs</text>
 </svg>'''
