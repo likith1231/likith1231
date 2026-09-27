@@ -1,0 +1,193 @@
+"""Build every profile asset and the README from content.py.
+
+    python scripts/build.py            # from the repo root
+
+Fonts are fetched from google/fonts on first run (all OFL). With GITHUB_TOKEN set,
+the whoami card's footer shows the live contribution count; without it, just the date.
+"""
+
+import json
+import os
+import sys
+import urllib.request
+from datetime import datetime, timezone
+from pathlib import Path
+
+import apple
+import ascii_card
+import banner
+import cards
+from content import HOST, LINKS, PROJECTS, USER
+from fontpaths import FontRef
+from theme import THEMES
+
+ROOT = Path(__file__).resolve().parent.parent
+ASSETS = ROOT / "assets"
+FONT_DIR = Path(__file__).resolve().parent / "fonts"
+
+FONT_FILES = {
+    "GrenzeGotisch[wght].ttf": "ofl/grenzegotisch/GrenzeGotisch%5Bwght%5D.ttf",
+    "CormorantGaramond[wght].ttf": "ofl/cormorantgaramond/CormorantGaramond%5Bwght%5D.ttf",
+    "CormorantGaramond-Italic[wght].ttf": "ofl/cormorantgaramond/CormorantGaramond-Italic%5Bwght%5D.ttf",
+    "FamiljenGrotesk[wght].ttf": "ofl/familjengrotesk/FamiljenGrotesk%5Bwght%5D.ttf",
+    "JetBrainsMono[wght].ttf": "ofl/jetbrainsmono/JetBrainsMono%5Bwght%5D.ttf",
+    "YujiBoku-Regular.ttf": "ofl/yujiboku/YujiBoku-Regular.ttf",
+}
+SECTIONS = {
+    "whoami": "whoami",
+    "work": "ls ~/death-note/pages",
+    "rules": "cat how_to_use_it.md",
+    "activity": "./contributions.sh",
+    "contact": "./summon.sh",
+}
+BUTTONS = (("linkedin", "LinkedIn"), ("email", "Email"), ("github", "All repos"))
+
+
+def ensure_fonts() -> None:
+    FONT_DIR.mkdir(exist_ok=True)
+    for name, remote in FONT_FILES.items():
+        target = FONT_DIR / name
+        if not target.exists():
+            print(f"fetching {name}")
+            urllib.request.urlretrieve(f"https://raw.githubusercontent.com/google/fonts/main/{remote}", target)
+
+
+def load_fonts() -> banner.Fonts:
+    def ref(name: str, *axes: tuple[str, float]) -> FontRef:
+        return FontRef(str(FONT_DIR / name), tuple(axes))
+
+    return banner.Fonts(
+        gothic=ref("GrenzeGotisch[wght].ttf", ("wght", 640)),
+        serif=ref("CormorantGaramond[wght].ttf", ("wght", 500)),
+        serif_bold=ref("CormorantGaramond[wght].ttf", ("wght", 700)),
+        italic=ref("CormorantGaramond-Italic[wght].ttf", ("wght", 500)),
+        sans=ref("FamiljenGrotesk[wght].ttf", ("wght", 400)),
+        sans_medium=ref("FamiljenGrotesk[wght].ttf", ("wght", 560)),
+        mono=ref("JetBrainsMono[wght].ttf", ("wght", 400)),
+        brush=ref("YujiBoku-Regular.ttf"),
+    )
+
+
+def contributions_last_year() -> int | None:
+    """Total from the contribution calendar, or None without a token or when the API fails."""
+    token = os.environ.get("GITHUB_TOKEN")
+    if not token:
+        return None
+    query = (
+        f'{{ user(login: "{USER}") {{ contributionsCollection '
+        f'{{ contributionCalendar {{ totalContributions }} }} }} }}'
+    )
+    request = urllib.request.Request(
+        "https://api.github.com/graphql",
+        data=json.dumps({"query": query}).encode(),
+        headers={"Authorization": f"bearer {token}", "Content-Type": "application/json"},
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=20) as response:
+            data = json.load(response)
+        return data["data"]["user"]["contributionsCollection"]["contributionCalendar"]["totalContributions"]
+    except (OSError, KeyError, TypeError, ValueError) as error:
+        print(f"stats unavailable, keeping the card static: {error}", file=sys.stderr)
+        return None
+
+
+def write(name: str, svg: str) -> None:
+    (ASSETS / name).write_text(svg, encoding="utf-8")
+
+
+def themed(name: str, alt: str, width: str = "100%") -> str:
+    """A <picture> that follows the viewer's GitHub theme."""
+    return (
+        f'<picture><source media="(prefers-color-scheme: dark)" srcset="./assets/{name}-dark.svg">'
+        f'<img src="./assets/{name}-light.svg" width="{width}" alt="{alt}"></picture>'
+    )
+
+
+def readme() -> str:
+    tiles = [
+        f'<a href="{p.repo}">{themed(f"project-{p.slug}", f"{p.name}: {p.kind}", "49%")}</a>'
+        for p in PROJECTS
+    ]
+    # Pairs share one line: GitHub turns a newline between images into a line break.
+    projects = "\n\n".join(" ".join(tiles[i:i + 2]) for i in range(0, len(tiles), 2))
+    repos = " · ".join(f'<a href="{p.repo}">{p.name}</a>' for p in PROJECTS)
+    buttons = " ".join(
+        f'<a href="{LINKS[key]}">{themed(f"link-{key}", label, "200")}</a>' for key, label in BUTTONS
+    )
+    # The contribution snake, unchanged: rendered by .github/workflows/snake.yml.
+    raw = f"https://raw.githubusercontent.com/{USER}/{USER}/output"
+    snake = (
+        f'<picture>\n  <source media="(prefers-color-scheme: dark)" srcset="{raw}/github-snake-dark.svg" />\n'
+        f'  <source media="(prefers-color-scheme: light)" srcset="{raw}/github-snake.svg" />\n'
+        f'  <img alt="Snake animation" src="{raw}/github-snake-dark.svg" width="860" />\n</picture>'
+    )
+    return f"""<!-- Generated by scripts/build.py from scripts/content.py. Edit those, not this file. -->
+<div align="center">
+
+<img src="./assets/banner.svg" width="100%" alt="Likith Lochan. DevOps, Backend/Full-Stack, Applied AI. A shinigami with an apple on a cathedral tower under a blood moon.">
+
+<br><br>
+
+{themed("header-whoami", "$ whoami")}
+
+{themed("apple", "ASCII art: Ryuk's apple resting on the Death Note", "49%")} {themed("whoami", "Role, stack, and what I have shipped", "49%")}
+
+<br><br>
+
+{themed("header-work", "$ ls ~/death-note/pages")}
+
+{projects}
+
+<sub>Source: {repos}</sub>
+
+<br><br>
+
+{themed("header-rules", "$ cat how_to_use_it.md")}
+
+{themed("rules", "How to use it: ship it, then armor it; automate the boring; verify before trusting")}
+
+<br><br>
+
+{themed("header-activity", "$ ./contributions.sh")}
+
+{snake}
+
+<br><br>
+
+{themed("header-contact", "$ ./summon.sh")}
+
+{buttons}
+
+</div>
+"""
+
+
+def main() -> None:
+    ensure_fonts()
+    fonts = load_fonts()
+    ASSETS.mkdir(exist_ok=True)
+    today = datetime.now(timezone.utc).strftime("%d %b %Y").lstrip("0")
+    total = contributions_last_year()
+    footer_right = f"{total:,} contributions in the last year" if total is not None else f"github.com/{USER}"
+
+    write("banner.svg", banner.render(fonts))
+    source, tint = apple.render()
+    art = ascii_card.Art(source, tint, "~/ringo", "ringo · the shinigami's apple, on the note",
+                         "ASCII art: Ryuk's apple resting on the Death Note")
+    for theme in THEMES:
+        suffix = f"-{theme.name}.svg"
+        write("apple" + suffix, ascii_card.render(theme, art, HOST, cards.emblem(theme, 30, 23)))
+        write("whoami" + suffix, cards.whoami(theme, fonts, f"updated {today}", footer_right))
+        for index, project in enumerate(PROJECTS, start=1):
+            write(f"project-{project.slug}{suffix}", cards.project(theme, fonts, index, project))
+        write("rules" + suffix, cards.rules(theme, fonts))
+        for key, command in SECTIONS.items():
+            write(f"header-{key}{suffix}", cards.header(theme, command))
+        for key, label in BUTTONS:
+            write(f"link-{key}{suffix}", cards.link_button(theme, label))
+    (ROOT / "README.md").write_text(readme(), encoding="utf-8")
+    print(f"built {len(list(ASSETS.glob('*.svg')))} svgs and README.md")
+
+
+if __name__ == "__main__":
+    main()
