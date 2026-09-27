@@ -14,6 +14,9 @@ from fontTools.ttLib import TTFont
 from fontTools.varLib.instancer import instantiateVariableFont
 
 
+SMALL_KANA = set("っゃゅょぁぃぅぇぉッャュョァィゥェォ")
+
+
 @dataclass(frozen=True)
 class FontRef:
     path: str
@@ -78,6 +81,9 @@ def vertical_path(ref: FontRef, text: str, size: float, gap: float = 0.1) -> Sha
     for char in text:
         glyph = text_path(ref, char, size)
         dx = (size - glyph.width) / 2
-        parts.append(f'<path transform="translate({dx:.2f} {y:.2f})" d="{glyph.d}"/>')
+        dy = 0.0
+        if char in SMALL_KANA:  # set in the upper right of their cell, as vertical text does
+            dx, dy = dx + size * 0.14, -size * 0.14
+        parts.append(f'<path transform="translate({dx:.2f} {y + dy:.2f})" d="{glyph.d}"/>')
         y += size * (1 + gap)
     return Shaped(d="".join(parts), width=size, height=y - size * gap)
