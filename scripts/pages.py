@@ -289,13 +289,13 @@ def entry(p: Profile, index: int, proj: Project, f: Fonts) -> str:
     repo = next((r for r in p.repos if r.name.lower() == proj.repo.lower()), None)
     when = f"{repo.pushed:%d %b %Y}".lstrip("0") if repo else "—"
     lang = repo.language if repo and repo.language else ""
-    name = fit_path(f.hand, proj.name, 84, HALF - 2 * PAD)
+    name = fit_path(f.gothic, proj.name, 72, HALF - 2 * PAD)
     struck = 0.2 + 1.4 + 0.2
     body = [
         _frame(HALF, h, f"DEATH NOTE  ·  ENTRY {index:02d}", "OPEN ↗", f),
         _written(name, PAD, 152, INK, 0.2, 1.4),
-        f'<line x1="{PAD - 6}" y1="{152 - name.ascent * 0.32:.0f}" x2="{PAD + name.width + 8:.0f}" y2="{152 - name.ascent * 0.38:.0f}" '
-        f'stroke="{RED}" stroke-width="5" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="0">'
+        f'<line x1="{PAD - 6}" y1="{152 - name.ascent * 0.28:.0f}" x2="{PAD + name.width + 8:.0f}" y2="{152 - name.ascent * 0.33:.0f}" '
+        f'stroke="{RED}" stroke-width="3" stroke-linecap="round" opacity="0.9" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="0">'
         f'<animate attributeName="stroke-dashoffset" values="1;1;0" keyTimes="0;{struck / (struck + 0.5):.3f};1" dur="{struck + 0.5:.2f}s" fill="freeze"/></line>',
     ]
     rows = [("CAUSE", text_path(f.serif_bold, proj.cause, 25)),
