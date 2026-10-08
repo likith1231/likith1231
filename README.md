@@ -13,6 +13,8 @@
 
 <a href="https://github.com/likith1231/sahayak"><img src="./assets/entry-3.svg" width="49%" alt="Sahayak: The middlemen between farm and market"></a> <a href="https://github.com/likith1231/greencart"><img src="./assets/entry-4.svg" width="49%" alt="GreenCart: Empty carts"></a>
 
+<a href="https://github.com/likith1231/Orbit-IDE"><img src="./assets/entry-5.svg" width="49%" alt="Orbit IDE: AI code that only looks right"></a> <a href="https://github.com/likith1231/Project-Management"><img src="./assets/entry-6.svg" width="49%" alt="Project Management: Tasks lost between workspaces"></a>
+
 <img src="./assets/ep-03.svg" width="100%" alt="Episode 03: Record">
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/likith1231/likith1231/output/github-snake-dark.svg"><img alt="Contribution snake" src="https://raw.githubusercontent.com/likith1231/likith1231/output/github-snake.svg" width="100%"></picture>
