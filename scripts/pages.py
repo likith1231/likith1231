@@ -279,6 +279,12 @@ PROJECTS = (
     Project("GreenCart", "greencart", "Empty carts",
             "A MERN grocery store with a separate seller dashboard, Cloudinary product images, JWT cookie auth, and cash-on-delivery or Stripe checkout.",
             "React · Express · MongoDB · Stripe · Tailwind"),
+    Project("Orbit IDE", "Orbit-IDE", "AI code that only looks right",
+            "A browser IDE with a Linux container per project; Claude's edits run in a sandbox and self-repair until tests pass, with live collab over Yjs.",
+            "React · Monaco · Express · Docker · Claude API"),
+    Project("Project Management", "Project-Management", "Tasks lost between workspaces",
+            "Workspaces, projects and tasks with roles, comments, calendar and analytics; Inngest emails assignees and sends due-date reminders.",
+            "React · Express · Prisma · Neon · Clerk · Inngest"),
 )
 
 
