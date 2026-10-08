@@ -160,13 +160,13 @@ def whoami(p: Profile, f: Fonts) -> str:
     h = 1000
     groups = (
         (
-            ("role", "DevOps · Backend/Full-Stack · Applied AI"),
+            ("role", "DevOps · Full-Stack · Applied AI"),
             ("focus", "AIOps · SRE · RAG systems"),
             ("based", "Bengaluru, India · UTC+5:30"),
             ("edu", "B.E. CSE · APS College of Engg."),
         ),
         (
-            ("langs", "Python · TypeScript · JavaScript · Java"),
+            ("langs", "Python · React · Java"),
             ("backend", "FastAPI · Node/Express · Socket.IO"),
             ("frontend", "React · Next.js · Tailwind · Three.js"),
             ("ai", "Claude · Gemini · CrewAI · pgvector"),
@@ -194,7 +194,7 @@ def whoami(p: Profile, f: Fonts) -> str:
             y += 38
             delay += 0.07
         y += 22
-    status = _mono(f, "open to DevOps/Cloud · Backend · SDE · AI/ML")
+    status = _mono(f, "open to DevOps/Cloud · SDE · AI/ML")
     body.append(
         f'<g><circle cx="{PAD + 6}" cy="{y - 6}" r="6" fill="{RED}"><animate attributeName="opacity" values="1;0.3;1" dur="2.2s" repeatCount="indefinite"/></circle>'
         + _at(status, PAD + 24, y, RED) + f"{_appear(delay, 0)}</g>"
@@ -207,7 +207,7 @@ def whoami(p: Profile, f: Fonts) -> str:
         f"{_appear(delay + 0.1, 0)}</g>"
     )
     body.append(_footer(HALF, h, p, f, f"{p.contributions:,} contributions in the last year"))
-    return _svg(HALF, h, f"whoami: Likith Lochan, DevOps, Backend/Full-Stack and Applied AI. {p.contributions} contributions in the last year.", "".join(body))
+    return _svg(HALF, h, f"whoami: Likith Lochan, DevOps, Full-Stack and Applied AI. {p.contributions} contributions in the last year.", "".join(body))
 
 
 # ---- page: how to use it ---------------------------------------------------------------
