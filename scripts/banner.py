@@ -338,7 +338,7 @@ def _type(f: Fonts) -> str:
     x = 64
     label = text_path(f.mono, "APS COLLEGE OF ENGINEERING  ·  B.E. CSE", 14, tracking=0.3)
     name = text_path(f.gothic, "Likith Lochan", 112)
-    role = text_path(f.serif_bold, "DevOps  ·  Backend/Full-Stack  ·  Applied AI", 31)
+    role = text_path(f.serif_bold, "DevOps  ·  Full-Stack  ·  Applied AI", 31)
     quote = text_path(f.italic, "“The incident whose name is written here shall be resolved.”", 26)
     top_l = text_path(f.mono, "DEATH NOTE", 13, tracking=0.4)
     top_r = text_path(f.mono, "EP.01  ·  REBIRTH", 13, tracking=0.3)
@@ -357,7 +357,7 @@ def _type(f: Fonts) -> str:
 
 def render(f: Fonts) -> str:
     rng = random.Random(SEED)
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="Likith Lochan. DevOps, Backend/Full-Stack, Applied AI. Tokyo at night in the rain under a blood moon, Ryuk watching from a rooftop as the Death Note falls.">
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="Likith Lochan. DevOps, Full-Stack, Applied AI. Tokyo at night in the rain under a blood moon, Ryuk watching from a rooftop as the Death Note falls.">
 <defs>{_defs()}</defs>
 <g clip-path="url(#frame)">
   <rect width="{W}" height="{H}" fill="url(#sky)"/>
