@@ -1,6 +1,6 @@
 """The profile's pages, each one showing live data from data.Profile.
 
-Aurora: bright white cards washed with pastel light, one violet-pink-orange gradient for anything that should
+Aurora: soft mint-white cards washed with morning light, one teal-aqua-sky gradient for anything that should
 catch the eye, and two voices of type: Inter for everything people read and JetBrains
 Mono for labels. All text is converted to paths (fontpaths.py) so it renders the same
 on every machine.
@@ -14,17 +14,18 @@ from html import escape
 from data import USER, Profile
 from fontpaths import FontRef, Shaped, fit_path, text_path
 
-PAGE = "#ffffff"
-TILE = "#f8f6ff"
-EDGE = "#e9e4f7"
-RULE = "#efebf8"
-INK = "#1c1633"
-MUTED = "#6c6686"
-FAINT = "#a9a4be"
-VIOLET = "#7c3aed"
-PINK = "#ec4899"
-ORANGE = "#f97316"
-GREEN = "#10b981"
+PAGE = "#f5f9f8"
+TILE = "#eaf3f1"
+EDGE = "#d5e6e2"
+RULE = "#e0ece9"
+INK = "#1d3340"
+MUTED = "#5b717a"
+FAINT = "#98abb0"
+TEAL = "#0f9f86"
+AQUA = "#1ba3c6"
+SKY = "#3a7fe0"
+SUN = "#f2a516"
+GREEN = "#16a34a"
 AURORA = "url(#aurora)"
 
 HALF, WIDE = 860, 1740
@@ -46,9 +47,9 @@ def _svg(w: float, h: float, label: str, body: str) -> str:
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{w:.0f}" height="{h:.0f}" viewBox="0 0 {w:.0f} {h:.0f}" '
         f'role="img" aria-label="{escape(label)}"><defs>'
         f'<linearGradient id="aurora" x1="0" y1="0" x2="1" y2="0">'
-        f'<stop offset="0" stop-color="{VIOLET}"/><stop offset="0.55" stop-color="{PINK}"/><stop offset="1" stop-color="{ORANGE}"/></linearGradient>'
-        f'<radialGradient id="glow"><stop offset="0" stop-color="#c4b5fd" stop-opacity="0.45"/>'
-        f'<stop offset="0.5" stop-color="#f9a8d4" stop-opacity="0.18"/><stop offset="1" stop-color="#f9a8d4" stop-opacity="0"/></radialGradient>'
+        f'<stop offset="0" stop-color="{TEAL}"/><stop offset="0.55" stop-color="{AQUA}"/><stop offset="1" stop-color="{SKY}"/></linearGradient>'
+        f'<radialGradient id="glow"><stop offset="0" stop-color="#99f6e4" stop-opacity="0.35"/>'
+        f'<stop offset="0.5" stop-color="#fde68a" stop-opacity="0.14"/><stop offset="1" stop-color="#fde68a" stop-opacity="0"/></radialGradient>'
         f'<clipPath id="card"><rect x="1" y="1" width="{w - 2:.0f}" height="{h - 2:.0f}" rx="18"/></clipPath>'
         f'</defs>{body}</svg>'
     )
@@ -85,7 +86,7 @@ def _frame(w: float, h: float, left: str, right: str, f: Fonts) -> str:
     r = text_path(f.mono, right, 13, tracking=0.22)
     return (
         _card(w, h)
-        + f'<circle cx="{PAD + 4}" cy="34" r="4.5" fill="{AURORA}"/>'
+        + f'<circle cx="{PAD + 4}" cy="34" r="4.5" fill="{SUN}"/>'
         + _at(l, PAD + 18, 39, MUTED) + _at(r, w - PAD - r.width, 39, MUTED)
         + f'<line x1="{PAD}" y1="60" x2="{w - PAD}" y2="60" stroke="{RULE}" stroke-width="1.5"/>'
     )
@@ -94,7 +95,7 @@ def _frame(w: float, h: float, left: str, right: str, f: Fonts) -> str:
 def _footer(w: float, h: float, p: Profile, f: Fonts, right: str = "") -> str:
     left = f"updated {p.today:%d %b %Y}".replace(" 0", " ") if p.live else "preview data"
     a = text_path(f.mono, left, 12, tracking=0.1)
-    out = f'<line x1="{PAD}" y1="{h - 46}" x2="{w - PAD}" y2="{h - 46}" stroke="{RULE}" stroke-width="1.5"/>' + _at(a, PAD, h - 20, FAINT if p.live else PINK)
+    out = f'<line x1="{PAD}" y1="{h - 46}" x2="{w - PAD}" y2="{h - 46}" stroke="{RULE}" stroke-width="1.5"/>' + _at(a, PAD, h - 20, FAINT if p.live else AQUA)
     if right:
         b = text_path(f.mono, right, 12, tracking=0.1)
         out += _at(b, w - PAD - b.width, h - 20, FAINT)
@@ -193,7 +194,7 @@ def whoami(p: Profile, f: Fonts) -> str:
     )
     body = [
         _frame(HALF, h, "~/WHOAMI", "ZSH", f),
-        _at(_mono(f, "$"), PAD, 110, PINK) + _at(_mono(f, "whoami"), PAD + 24, 110, INK),
+        _at(_mono(f, "$"), PAD, 110, AQUA) + _at(_mono(f, "whoami"), PAD + 24, 110, INK),
         f'<g>{_at(text_path(f.display, "Likith Lochan", 66, tracking=-0.02), PAD, 188, AURORA)}{_appear(0.2)}</g>',
     ]
     y, delay = 252, 0.6
@@ -213,7 +214,7 @@ def whoami(p: Profile, f: Fonts) -> str:
     )
     y += 46
     body.append(
-        f"<g>{_at(_mono(f, '$'), PAD, y, PINK)}"
+        f"<g>{_at(_mono(f, '$'), PAD, y, AQUA)}"
         f'<rect x="{PAD + 24}" y="{y - 18}" width="11" height="22" fill="{INK}">'
         '<animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.5;0.5;1" dur="1.1s" repeatCount="indefinite"/></rect>'
         f"{_appear(delay + 0.1, 0)}</g>"
@@ -224,7 +225,7 @@ def whoami(p: Profile, f: Fonts) -> str:
 
 # ---- page: stats -----------------------------------------------------------------------
 
-HEAT = ("#f1eef9", "#ddd6fe", "#a78bfa", "#f472b6", "#fb923c")
+HEAT = ("#e3eeec", "#b9e8dc", "#6fd0bd", "#38b0d0", SUN)
 
 
 def stats(p: Profile, f: Fonts) -> str:

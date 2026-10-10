@@ -18,11 +18,11 @@ jobs:
         uses: Platane/snk/svg-only@v3
         with:
           github_user_name: likith1231
-          # Aurora palette: contribution cells rising from violet through pink to orange,
-          # a near-white snake on dark, a deep ink snake on light.
+          # Fresh palette: contribution cells rising from mint through aqua to sunshine,
+          # a white snake on dark, a deep ink snake on light.
           outputs: |
-            dist/github-snake.svg?color_snake=#1e1b2e&color_dots=#ebedf0,#ddd6fe,#a78bfa,#ec4899,#f97316
-            dist/github-snake-dark.svg?color_snake=#f5f5fa&color_dots=#161b22,#3b1d72,#7c3aed,#db2777,#fb923c
+            dist/github-snake.svg?color_snake=#1d3340&color_dots=#ebedf0,#b9e8dc,#6fd0bd,#38b0d0,#f2a516
+            dist/github-snake-dark.svg?color_snake=#f5f9f8&color_dots=#161b22,#0f4f45,#0f9f86,#1ba3c6,#f2a516
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
