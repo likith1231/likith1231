@@ -132,6 +132,11 @@ def _wrap(font: FontRef, text: str, size: float, width: float, lines: int) -> li
     return out
 
 
+def _ago(p: Profile, d) -> str:
+    n = (p.today - d).days
+    return "today" if n <= 0 else "yesterday" if n == 1 else f"{n} days ago"
+
+
 def _pills(f: Fonts, items: list[str], x: float, y: float, max_width: float, size: float = 14) -> str:
     """A row of rounded tags, shrunk together until the row fits."""
     while True:
@@ -236,7 +241,7 @@ def whoami(p: Profile, f: Fonts) -> str:
 # ---- page: stats -----------------------------------------------------------------------
 
 def stats(p: Profile, f: Fonts) -> str:
-    """The year in numbers: contributions, streaks, a heatmap and the language mix."""
+    """The year in numbers: contributions, streaks, what shipped lately and the language mix."""
     h = 1000
     inner = HALF - 2 * PAD
     body = [_frame(HALF, h, "~/STATS", "LAST 12 MONTHS", f)]
@@ -258,34 +263,19 @@ def stats(p: Profile, f: Fonts) -> str:
         )
         body.append(f"<g>{tile}{_appear(0.4 + i * 0.1)}</g>")
 
-    # Heatmap: one column per week, Sunday at the top, coloured by quartile of the active days.
-    body.append(_at(text_path(f.mono, "EVERY DAY OF THE YEAR", 13, tracking=0.25), PAD, 524, MUTED))
-    days = p.days[-364:] if len(p.days) >= 364 else p.days
-    offset = (days[0][0].weekday() + 1) % 7
-    active = sorted(n for _, n in days if n)
-    cuts = [active[int(len(active) * q)] for q in (0.25, 0.5, 0.75)] if active else [1, 2, 3]
-    weeks = (len(days) + offset + 6) // 7
-    step = inner / weeks
-    cell = step * 0.78
-    top = 548
-    cols: dict[int, list[str]] = {}
-    for i, (_, n) in enumerate(days):
-        col, row = divmod(i + offset, 7)
-        level = 0 if not n else 1 + sum(n > c for c in cuts)
-        cols.setdefault(col, []).append(
-            f'<rect x="{PAD + col * step:.1f}" y="{top + row * step:.1f}" width="{cell:.1f}" height="{cell:.1f}" rx="2.5" fill="{HEAT[level]}"/>'
-        )
-    for col, cells in cols.items():
-        body.append(f"<g>{''.join(cells)}{_appear(0.6 + col * 0.015, 0)}</g>")
-    legend_y = top + 7 * step + 22
-    less = text_path(f.mono, "less", 12)
-    more = text_path(f.mono, "more", 12)
-    lx = HALF - PAD - more.width
-    body.append(_at(more, lx, legend_y + 4, FAINT))
-    for k in range(4, -1, -1):
-        lx -= 18
-        body.append(f'<rect x="{lx:.1f}" y="{legend_y - 8:.1f}" width="12" height="12" rx="2.5" fill="{HEAT[k]}"/>')
-    body.append(_at(less, lx - 8 - less.width, legend_y + 4, FAINT))
+    # Recently shipped: the latest repos to move, live from GitHub.
+    body.append(_at(text_path(f.mono, "RECENTLY SHIPPED", 13, tracking=0.25), PAD, 524, MUTED))
+    for i, repo in enumerate(p.repos[:4]):
+        y = 572 + i * 42
+        name = text_path(f.bold, repo.name, 21)
+        when = text_path(f.mono, _ago(p, repo.pushed), 14)
+        row = f'<circle cx="{PAD + 6}" cy="{y - 7}" r="6" fill="{repo.color}"/>' + _at(name, PAD + 22, y, INK)
+        if repo.language:
+            row += _at(text_path(f.mono, repo.language, 14), PAD + 22 + name.width + 14, y - 1, MUTED)
+        row += _at(when, HALF - PAD - when.width, y - 1, ACCENT if i == 0 else FAINT)
+        if i:
+            row += f'<line x1="{PAD}" y1="{y - 30}" x2="{HALF - PAD}" y2="{y - 30}" stroke="{RULE}" stroke-width="1"/>'
+        body.append(f"<g>{row}{_appear(0.6 + i * 0.1, 0)}</g>")
 
     # Languages, by bytes across all public repos.
     langs = p.languages[:6]
@@ -308,7 +298,7 @@ def stats(p: Profile, f: Fonts) -> str:
             + _at(text_path(f.sans, name, 20), cx + 22, cy, INK)
             + _at(text_path(f.mono, f"{share / total:.0%}", 15), cx + 22 + text_path(f.sans, name, 20).width + 10, cy, MUTED)
         )
-    body.append(_footer(HALF, h, p, f, f"{p.active30} active days in the last 30"))
+    body.append(_footer(HALF, h, p, f, "refreshed hourly from GitHub"))
     return _svg(HALF, h, f"Stats: {p.contributions} contributions in the last year, current streak {p.current_streak} days, longest {p.longest_streak} days, {p.repo_count} public repos.", "".join(body))
 
 

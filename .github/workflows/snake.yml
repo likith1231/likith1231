@@ -1,9 +1,9 @@
 name: Generate Snake
 
 on:
-  # Run every 12 hours
+  # Run every 6 hours
   schedule:
-    - cron: "0 */12 * * *"
+    - cron: "0 */6 * * *"
   # Allow manual trigger from Actions tab
   workflow_dispatch:
 
@@ -18,10 +18,11 @@ jobs:
         uses: Platane/snk/svg-only@v3
         with:
           github_user_name: likith1231
-          # GitHub's own contribution greens, light and dark, so the snake matches the profile.
+          # The profile's palette (scripts/pages.py THEMES): contribution greens for the cells,
+          # the green-teal accent for the snake, in GitHub's light and dark colours.
           outputs: |
-            dist/github-snake.svg
-            dist/github-snake-dark.svg?palette=github-dark
+            dist/github-snake.svg?color_snake=#0e8a7e&color_dots=#eff2f5,#aceebb,#4ac26b,#2da44e,#116329
+            dist/github-snake-dark.svg?color_snake=#39c5bb&color_dots=#151b23,#033a16,#196c2e,#2ea043,#56d364
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

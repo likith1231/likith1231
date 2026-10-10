@@ -72,7 +72,7 @@ def readme(p: data.Profile) -> str:
 
 {img("ep-01", "01: About")}
 
-{img("stats", "Stats: contributions, streaks, a year of activity and languages", "49%")} {img("whoami", "whoami: role, stack and what I have shipped", "49%")}
+{img("stats", "Stats: contributions, streaks, recently shipped repos and languages", "49%")} {img("whoami", "whoami: role, stack and what I have shipped", "49%")}
 
 {img("ep-02", "02: Projects")}
 
