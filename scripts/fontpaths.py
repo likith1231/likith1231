@@ -1,7 +1,7 @@
 """Turn text into SVG path data, so the art renders identically on every machine.
 
 GitHub serves README images as <img>, which cannot load web fonts, and viewers
-without a blackletter or Japanese brush font would otherwise see a fallback face.
+without Inter or JetBrains Mono installed would otherwise see a fallback face.
 """
 
 import re
