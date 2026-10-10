@@ -50,7 +50,11 @@ def load_fonts() -> pages.Fonts:
 
 
 def img(name: str, alt: str, width: str = "100%") -> str:
-    return f'<img src="./assets/{name}.svg" width="{width}" alt="{alt}">'
+    """The light page, swapped for its dark twin when GitHub is in dark mode."""
+    return (
+        f'<picture><source media="(prefers-color-scheme: dark)" srcset="./assets/dark/{name}.svg">'
+        f'<img src="./assets/{name}.svg" width="{width}" alt="{alt}"></picture>'
+    )
 
 
 def readme(p: data.Profile) -> str:
@@ -90,14 +94,18 @@ def readme(p: data.Profile) -> str:
 """
 
 
-def write(name: str, svg: str) -> None:
-    (ASSETS / f"{name}.svg").write_text(svg, encoding="utf-8")
-
-
 def main() -> None:
     f = load_fonts()
     p = data.load()
-    ASSETS.mkdir(exist_ok=True)
+    for theme, folder in (("light", ASSETS), ("dark", ASSETS / "dark")):
+        folder.mkdir(parents=True, exist_ok=True)
+        pages.set_theme(theme)
+        render(p, f, lambda name, svg: (folder / f"{name}.svg").write_text(svg, encoding="utf-8"))
+    (ROOT / "README.md").write_text(readme(p), encoding="utf-8")
+    print(f"built README and {len(list(ASSETS.rglob('*.svg')))} svgs from {'live' if p.live else 'preview'} data")
+
+
+def render(p: data.Profile, f: pages.Fonts, write) -> None:
     sections = (
         ("About", "Who I am and what I work with."),
         ("Projects", "Problems I set out to solve."),
@@ -115,8 +123,6 @@ def main() -> None:
     for label, _ in LINKS:
         write(f"link-{label.lower()}", pages.button(label, f))
     write("banner", banner.render(f))
-    (ROOT / "README.md").write_text(readme(p), encoding="utf-8")
-    print(f"built README and {len(list(ASSETS.glob('*.svg')))} svgs from {'live' if p.live else 'preview'} data")
 
 
 if __name__ == "__main__":

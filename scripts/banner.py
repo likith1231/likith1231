@@ -1,11 +1,12 @@
 """The banner: a name, a role and a line, lit by a slow aurora.
 
-Four soft blobs of mint, sky, sunshine and leaf green drift behind a faint dot grid, and the name
+Four faint glows of GitHub blue, purple and green drift behind a faint dot grid, and the name
 carries the same gradient, sliding through it. Nothing else competes with the type.
 """
 
 from fontpaths import text_path
-from pages import GREEN, INK, MUTED, SKY, AQUA, TEAL, Fonts, _appear, _at
+import pages
+from pages import Fonts, _appear, _at
 
 W, H = 1280, 460
 
@@ -13,19 +14,19 @@ W, H = 1280, 460
 def _defs() -> str:
     blobs = "".join(
         f'<radialGradient id="b{i}"><stop offset="0" stop-color="{c}" stop-opacity="{o}"/><stop offset="1" stop-color="{c}" stop-opacity="0"/></radialGradient>'
-        for i, (c, o) in enumerate((("#99f6e4", 0.7), ("#bae6fd", 0.75), ("#fde68a", 0.7), ("#c7f9cc", 0.55)))
+        for i, (c, o) in enumerate(((pages.ACCENT, pages.GLOW * 3), (pages.ACCENT2, pages.GLOW * 2.5), (pages.ACCENT, pages.GLOW * 2), (pages.GREEN, pages.GLOW * 1.2)))
     )
     return f'''
   <clipPath id="frame"><rect width="{W}" height="{H}" rx="20"/></clipPath>
   {blobs}
   <linearGradient id="name" x1="0" y1="0" x2="1" y2="0" spreadMethod="reflect">
-    <stop offset="0" stop-color="{TEAL}"/><stop offset="0.5" stop-color="{AQUA}"/><stop offset="1" stop-color="{SKY}"/>
+    <stop offset="0" stop-color="{pages.ACCENT}"/><stop offset="1" stop-color="{pages.ACCENT2}"/>
     <animateTransform attributeName="gradientTransform" type="translate" values="0 0;-1 0;0 0" dur="10s" repeatCount="indefinite"/>
   </linearGradient>
   <linearGradient id="rule" x1="0" y1="0" x2="1" y2="0">
-    <stop offset="0" stop-color="{TEAL}"/><stop offset="0.55" stop-color="{AQUA}"/><stop offset="1" stop-color="{SKY}"/>
+    <stop offset="0" stop-color="{pages.ACCENT}"/><stop offset="1" stop-color="{pages.ACCENT2}"/>
   </linearGradient>
-  <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#1d3340" fill-opacity="0.07"/></pattern>
+  <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="{pages.INK}" fill-opacity="0.06"/></pattern>
   <linearGradient id="fade" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0.2"/><stop offset="1" stop-color="#fff" stop-opacity="1"/></linearGradient>
   <mask id="dotMask"><rect width="{W}" height="{H}" fill="url(#fade)"/></mask>
   <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="40"/></filter>'''
@@ -55,14 +56,14 @@ def _type(f: Fonts) -> str:
     status = text_path(f.mono, "OPEN TO DevOps/Cloud · SDE · AI/ML", 14, tracking=0.12)
     pill_w = status.width + 64
     return (
-        f'<g>{_at(label, x, 104, MUTED)}{_appear(0.1, 0)}</g>'
+        f'<g>{_at(label, x, 104, pages.MUTED)}{_appear(0.1, 0)}</g>'
         f'<g>{_at(name, x - 4, 236, "url(#name)")}{_appear(0.25, 14)}</g>'
         f'<g><rect x="{x}" y="266" width="120" height="4" rx="2" fill="url(#rule)"/>{_appear(0.5, 0)}</g>'
-        f'<g>{_at(role, x, 326, INK)}{_appear(0.6)}</g>'
-        f'<g>{_at(line, x, 368, MUTED)}{_appear(0.75)}</g>'
-        f'<g><rect x="{W - 72 - pill_w:.1f}" y="66" width="{pill_w:.1f}" height="40" rx="20" fill="#ffffff" fill-opacity="0.85" stroke="{GREEN}" stroke-opacity="0.5" stroke-width="1.5"/>'
-        f'<circle cx="{W - 72 - pill_w + 24:.1f}" cy="86" r="5" fill="{GREEN}"><animate attributeName="opacity" values="1;0.35;1" dur="2.2s" repeatCount="indefinite"/></circle>'
-        + _at(status, W - 72 - pill_w + 40, 91, INK) + f"{_appear(0.9, 0)}</g>"
+        f'<g>{_at(role, x, 326, pages.INK)}{_appear(0.6)}</g>'
+        f'<g>{_at(line, x, 368, pages.MUTED)}{_appear(0.75)}</g>'
+        f'<g><rect x="{W - 72 - pill_w:.1f}" y="66" width="{pill_w:.1f}" height="40" rx="20" fill="{pages.PAGE}" fill-opacity="0.85" stroke="{pages.GREEN}" stroke-opacity="0.5" stroke-width="1.5"/>'
+        f'<circle cx="{W - 72 - pill_w + 24:.1f}" cy="86" r="5" fill="{pages.GREEN}"><animate attributeName="opacity" values="1;0.35;1" dur="2.2s" repeatCount="indefinite"/></circle>'
+        + _at(status, W - 72 - pill_w + 40, 91, pages.INK) + f"{_appear(0.9, 0)}</g>"
     )
 
 
@@ -70,10 +71,10 @@ def render(f: Fonts) -> str:
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="Likith Lochan. DevOps, Full-Stack, Applied AI. I build systems that ship, scale and fix themselves.">
 <defs>{_defs()}</defs>
 <g clip-path="url(#frame)">
-  <rect width="{W}" height="{H}" fill="#f3f8f7"/>
+  <rect width="{W}" height="{H}" fill="{pages.PAGE}"/>
   {_aurora()}
   <rect width="{W}" height="{H}" fill="url(#dots)" mask="url(#dotMask)"/>
   {_type(f)}
 </g>
-<rect x="1" y="1" width="{W - 2}" height="{H - 2}" rx="19" fill="none" stroke="#d5e6e2" stroke-width="2"/>
+<rect x="1" y="1" width="{W - 2}" height="{H - 2}" rx="19" fill="none" stroke="{pages.EDGE}" stroke-width="2"/>
 </svg>'''

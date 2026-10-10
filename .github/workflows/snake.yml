@@ -18,11 +18,10 @@ jobs:
         uses: Platane/snk/svg-only@v3
         with:
           github_user_name: likith1231
-          # Fresh palette: contribution cells rising from mint through aqua to sunshine,
-          # a white snake on dark, a deep ink snake on light.
+          # GitHub's own contribution greens, light and dark, so the snake matches the profile.
           outputs: |
-            dist/github-snake.svg?color_snake=#1d3340&color_dots=#ebedf0,#b9e8dc,#6fd0bd,#38b0d0,#f2a516
-            dist/github-snake-dark.svg?color_snake=#f5f9f8&color_dots=#161b22,#0f4f45,#0f9f86,#1ba3c6,#f2a516
+            dist/github-snake.svg
+            dist/github-snake-dark.svg?palette=github-dark
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
