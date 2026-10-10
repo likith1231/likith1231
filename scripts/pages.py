@@ -1,7 +1,7 @@
 """The profile's pages, each one showing live data from data.Profile.
 
 Drawn in GitHub's own colours, once for its light theme and once for its dark one, so the
-pages sit inside the profile as if GitHub had drawn them. One blue-to-purple gradient marks
+pages sit inside the profile as if GitHub had drawn them. One green-to-teal gradient, after the contribution greens, marks
 what should catch the eye, and there are two voices of type: Inter for everything people read and JetBrains
 Mono for labels. All text is converted to paths (fontpaths.py) so it renders the same
 on every machine.
@@ -19,12 +19,12 @@ from fontpaths import FontRef, Shaped, fit_path, text_path
 THEMES = {
     "light": dict(
         PAGE="#ffffff", TILE="#f6f8fa", EDGE="#d1d9e0", RULE="#e6eaef", INK="#1f2328", MUTED="#59636e", FAINT="#818b98",
-        ACCENT="#0969da", ACCENT2="#8250df", GREEN="#1a7f37", GLOW=0.05,
+        ACCENT="#1a7f37", ACCENT2="#0e8a7e", GREEN="#1a7f37", GLOW=0.05,
         HEAT=("#eff2f5", "#aceebb", "#4ac26b", "#2da44e", "#116329"),
     ),
     "dark": dict(
         PAGE="#0d1117", TILE="#151b23", EDGE="#3d444d", RULE="#262c36", INK="#f0f6fc", MUTED="#9198a1", FAINT="#656c76",
-        ACCENT="#4493f8", ACCENT2="#ab7df8", GREEN="#3fb950", GLOW=0.09,
+        ACCENT="#3fb950", ACCENT2="#39c5bb", GREEN="#3fb950", GLOW=0.09,
         HEAT=("#151b23", "#033a16", "#196c2e", "#2ea043", "#56d364"),
     ),
 }

@@ -1,6 +1,6 @@
 """The banner: a name, a role and a line, lit by a slow aurora.
 
-Four faint glows of GitHub blue, purple and green drift behind a faint dot grid, and the name
+Four faint glows of GitHub green and teal drift behind a faint dot grid, and the name
 carries the same gradient, sliding through it. Nothing else competes with the type.
 """
 
