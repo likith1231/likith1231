@@ -1,6 +1,6 @@
 """The profile's pages, each one showing live data from data.Profile.
 
-Aurora: deep night-blue cards, one violet-pink-orange gradient for anything that should
+Aurora: bright white cards washed with pastel light, one violet-pink-orange gradient for anything that should
 catch the eye, and two voices of type: Inter for everything people read and JetBrains
 Mono for labels. All text is converted to paths (fontpaths.py) so it renders the same
 on every machine.
@@ -14,17 +14,17 @@ from html import escape
 from data import USER, Profile
 from fontpaths import FontRef, Shaped, fit_path, text_path
 
-PAGE = "#0d0d17"
-TILE = "#14141f"
-EDGE = "#25253b"
-RULE = "#1d1d2e"
-INK = "#f5f5fa"
-MUTED = "#9d9db5"
-FAINT = "#55556e"
-VIOLET = "#8b5cf6"
+PAGE = "#ffffff"
+TILE = "#f8f6ff"
+EDGE = "#e9e4f7"
+RULE = "#efebf8"
+INK = "#1c1633"
+MUTED = "#6c6686"
+FAINT = "#a9a4be"
+VIOLET = "#7c3aed"
 PINK = "#ec4899"
-ORANGE = "#fb923c"
-GREEN = "#34d399"
+ORANGE = "#f97316"
+GREEN = "#10b981"
 AURORA = "url(#aurora)"
 
 HALF, WIDE = 860, 1740
@@ -47,8 +47,8 @@ def _svg(w: float, h: float, label: str, body: str) -> str:
         f'role="img" aria-label="{escape(label)}"><defs>'
         f'<linearGradient id="aurora" x1="0" y1="0" x2="1" y2="0">'
         f'<stop offset="0" stop-color="{VIOLET}"/><stop offset="0.55" stop-color="{PINK}"/><stop offset="1" stop-color="{ORANGE}"/></linearGradient>'
-        f'<radialGradient id="glow"><stop offset="0" stop-color="{VIOLET}" stop-opacity="0.28"/>'
-        f'<stop offset="0.5" stop-color="{PINK}" stop-opacity="0.08"/><stop offset="1" stop-color="{PINK}" stop-opacity="0"/></radialGradient>'
+        f'<radialGradient id="glow"><stop offset="0" stop-color="#c4b5fd" stop-opacity="0.45"/>'
+        f'<stop offset="0.5" stop-color="#f9a8d4" stop-opacity="0.18"/><stop offset="1" stop-color="#f9a8d4" stop-opacity="0"/></radialGradient>'
         f'<clipPath id="card"><rect x="1" y="1" width="{w - 2:.0f}" height="{h - 2:.0f}" rx="18"/></clipPath>'
         f'</defs>{body}</svg>'
     )
@@ -224,7 +224,7 @@ def whoami(p: Profile, f: Fonts) -> str:
 
 # ---- page: stats -----------------------------------------------------------------------
 
-HEAT = ("#1a1a29", "#3b1d72", "#7c3aed", "#db2777", ORANGE)
+HEAT = ("#f1eef9", "#ddd6fe", "#a78bfa", "#f472b6", "#fb923c")
 
 
 def stats(p: Profile, f: Fonts) -> str:
