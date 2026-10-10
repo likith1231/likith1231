@@ -232,57 +232,56 @@ def whoami(p: Profile, f: Fonts) -> str:
     return _svg(HALF, h, "whoami: Likith Lochan, DevOps, Full-Stack and Applied AI.", "".join(body))
 
 
-# ---- page: featured ------------------------------------------------------------------
+# ---- page: about ---------------------------------------------------------------------
 
-PIPELINE = (
-    ("Alert", "Alertmanager fires on a production incident."),
-    ("Diagnose", "Three CrewAI agents trace it to the root cause."),
-    ("Patch", "They write the smallest change that fixes it."),
-    ("Prove", "The patch runs in a Docker sandbox under OPA."),
-    ("Ship", "Only a fix that passes becomes a pull request."),
+AREAS = (
+    ("loop", "DevOps & Cloud", "Kubernetes, Terraform and CI/CD that ship and self-heal."),
+    ("layers", "Full-Stack", "React and Next.js on FastAPI and Node back ends."),
+    ("spark", "Applied AI", "Agents and RAG that do real work, gated by tests."),
 )
+ICONS = {
+    "loop": "M-11 0 C-11 -9 -3 -9 0 0 C3 9 11 9 11 0 C11 -9 3 -9 0 0 C-3 9 -11 9 -11 0 Z",
+    "layers": "M0 -11 L12 -5 L0 1 L-12 -5 Z M-12 1 L0 7 L12 1 M-12 7 L0 13 L12 7",
+    "spark": "M0 -13 C1.5 -4 4 -1.5 13 0 C4 1.5 1.5 4 0 13 C-1.5 4 -4 1.5 -13 0 C-4 -1.5 -1.5 -4 0 -13 Z",
+}
 
 
-def featured(p: Profile, f: Fonts) -> str:
-    """GhostOps, the flagship, as the path one incident takes from alert to pull request."""
+def about(f: Fonts) -> str:
+    """Who I am in a few lines: what I build, the three things I do, and the roles I'm open to."""
     h = 1000
     inner = HALF - 2 * PAD
     body = [
-        _frame(HALF, h, "~/FEATURED", "GHOSTOPS ↗", f),
-        _at(text_path(f.mono, "AUTONOMOUS AIOPS", 13, tracking=0.25), PAD, 112, MUTED),
-        f'<g>{_at(text_path(f.display, "GhostOps", 66, tracking=-0.02), PAD - 2, 188, AURORA)}{_appear(0.2)}</g>',
-        _at(fit_path(f.bold, "Production incidents, patched on their own", 26, inner), PAD, 232, INK),
+        _frame(HALF, h, "~/ABOUT", "README.MD", f),
+        _at(text_path(f.mono, "ABOUT ME", 13, tracking=0.25), PAD, 112, MUTED),
+        f'<g>{_at(text_path(f.display, "I build it, ship it,", 50, tracking=-0.02), PAD - 2, 178, INK)}{_appear(0.15)}</g>',
+        f'<g>{_at(text_path(f.display, "and keep it running.", 50, tracking=-0.02), PAD - 2, 236, AURORA)}{_appear(0.3)}</g>',
     ]
-    top, step, cx = 318, 104, PAD + 24
-    bottom = top + step * (len(PIPELINE) - 1)
-    # The rail, and a pulse that keeps running down it like an incident moving through.
-    body.append(
-        f'<line x1="{cx}" y1="{top}" x2="{cx}" y2="{bottom}" stroke="{EDGE}" stroke-width="2"/>'
-        f'<circle cx="{cx}" cy="{top}" r="5" fill="{ACCENT}">'
-        f'<animate attributeName="cy" values="{top};{bottom}" dur="4s" repeatCount="indefinite"/>'
-        '<animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="4s" repeatCount="indefinite"/></circle>'
-    )
-    for i, (title, line) in enumerate(PIPELINE):
-        y = top + i * step
-        num = text_path(f.mono, f"{i + 1}", 18)
-        last = i == len(PIPELINE) - 1
-        node = (
-            f'<circle cx="{cx}" cy="{y}" r="24" fill="{TILE}" stroke="{ACCENT if last else EDGE}" stroke-width="2"/>'
-            + _at(num, cx - num.width / 2, y + 7, ACCENT)
-            + _at(text_path(f.bold, title, 26), cx + 48, y - 4, INK)
-            + _at(fit_path(f.sans, line, 21, inner - 72), cx + 48, y + 26, MUTED)
+    intro = ("A CSE student in Bengaluru who builds software end to end: the app, the "
+             "infrastructure it runs on, and the AI that helps keep it healthy.")
+    for k, line in enumerate(_wrap(f.sans, intro, 23, inner, 3)):
+        body.append(_at(text_path(f.sans, line, 23), PAD, 298 + k * 33, MUTED))
+
+    body.append(_at(text_path(f.mono, "WHAT I DO", 13, tracking=0.25), PAD, 430, MUTED))
+    for i, (icon, title, line) in enumerate(AREAS):
+        y = 464 + i * 104
+        row = (
+            f'<rect x="{PAD}" y="{y}" width="64" height="64" rx="14" fill="{TILE}" stroke="{EDGE}" stroke-width="1.5"/>'
+            f'<path transform="translate({PAD + 32} {y + 32})" d="{ICONS[icon]}" fill="none" stroke="{ACCENT}" '
+            'stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>'
+            + _at(text_path(f.bold, title, 26), PAD + 88, y + 26, INK)
+            + _at(fit_path(f.sans, line, 21, inner - 88), PAD + 88, y + 56, MUTED)
         )
-        body.append(f"<g>{node}{_appear(0.5 + i * 0.18, 0)}</g>")
-    ry = bottom + 70
-    result = text_path(f.bold, "2 incidents fixed end to end", 22)
+        if i:
+            row += f'<line x1="{PAD}" y1="{y - 20}" x2="{HALF - PAD}" y2="{y - 20}" stroke="{RULE}" stroke-width="1.5"/>'
+        body.append(f"<g>{row}{_appear(0.5 + i * 0.15, 0)}</g>")
+
+    oy = 820
     body.append(
-        f'<g><rect x="{PAD}" y="{ry}" width="{inner}" height="64" rx="12" fill="{TILE}" stroke="{EDGE}" stroke-width="1.5"/>'
-        f'<circle cx="{PAD + 34}" cy="{ry + 32}" r="13" fill="{GREEN}"/>'
-        f'<path d="M{PAD + 28} {ry + 32} l4.5 4.5 l8 -9" fill="none" stroke="{PAGE}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>'
-        + _at(result, PAD + 62, ry + 40, INK) + f"{_appear(0.5 + len(PIPELINE) * 0.18, 0)}</g>"
+        f'<g><circle cx="{PAD + 6}" cy="{oy - 5}" r="6" fill="{GREEN}"><animate attributeName="opacity" values="1;0.35;1" dur="2.2s" repeatCount="indefinite"/></circle>'
+        + _at(text_path(f.mono, "OPEN TO", 13, tracking=0.25), PAD + 22, oy, MUTED) + "</g>"
     )
-    body.append(_pills(f, ["CrewAI", "Claude API", "FastAPI", "Kubernetes", "OPA"], PAD, h - 72, inner))
-    return _svg(HALF, h, "Featured: GhostOps. Alertmanager fires; CrewAI agents find the root cause, write a minimal patch, prove it in a Docker sandbox under OPA, and open a pull request. 2 incidents fixed end to end.", "".join(body))
+    body.append(_pills(f, ["DevOps / Cloud", "SDE", "AI / ML"], PAD, oy + 24, inner, size=18))
+    return _svg(HALF, h, "About me: I build it, ship it, and keep it running. A CSE student in Bengaluru who builds software end to end. DevOps and Cloud, Full-Stack, Applied AI. Open to DevOps/Cloud, SDE and AI/ML roles.", "".join(body))
 
 
 # ---- page: how I work ------------------------------------------------------------------
