@@ -132,11 +132,6 @@ def _wrap(font: FontRef, text: str, size: float, width: float, lines: int) -> li
     return out
 
 
-def _ago(p: Profile, d) -> str:
-    n = (p.today - d).days
-    return "today" if n <= 0 else "yesterday" if n == 1 else f"{n} days ago"
-
-
 def _pills(f: Fonts, items: list[str], x: float, y: float, max_width: float, size: float = 14) -> str:
     """A row of rounded tags, shrunk together until the row fits."""
     while True:
@@ -203,7 +198,6 @@ def whoami(p: Profile, f: Fonts) -> str:
             ("ship", "Docker · GitHub Actions · Vault · k6"),
         ),
         (
-            ("activity", f"{p.contributions:,} contributions · {p.current_streak}-day streak"),
             ("proof", "GhostOps: 2 incidents fixed end to end"),
         ),
     )
@@ -217,7 +211,7 @@ def whoami(p: Profile, f: Fonts) -> str:
         body.append(f'<line x1="{PAD}" y1="{y - 24}" x2="{HALF - PAD}" y2="{y - 24}" stroke="{RULE}" stroke-width="1.5"/>')
         y += 14
         for key, value in group:
-            row = _at(_mono(f, key), PAD, y, MUTED) + _at(_mono(f, value), PAD + 150, y, AURORA if key == "activity" else INK)
+            row = _at(_mono(f, key), PAD, y, MUTED) + _at(_mono(f, value), PAD + 150, y, INK)
             body.append(f"<g>{row}{_appear(delay, 0)}</g>")
             y += 38
             delay += 0.06
@@ -234,72 +228,61 @@ def whoami(p: Profile, f: Fonts) -> str:
         '<animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.5;0.5;1" dur="1.1s" repeatCount="indefinite"/></rect>'
         f"{_appear(delay + 0.1, 0)}</g>"
     )
-    body.append(_footer(HALF, h, p, f, f"{p.contributions:,} contributions in the last year"))
-    return _svg(HALF, h, f"whoami: Likith Lochan, DevOps, Full-Stack and Applied AI. {p.contributions} contributions in the last year.", "".join(body))
+    body.append(_footer(HALF, h, p, f, "Bengaluru · UTC+5:30"))
+    return _svg(HALF, h, "whoami: Likith Lochan, DevOps, Full-Stack and Applied AI.", "".join(body))
 
 
-# ---- page: stats -----------------------------------------------------------------------
+# ---- page: featured ------------------------------------------------------------------
 
-def stats(p: Profile, f: Fonts) -> str:
-    """The year in numbers: contributions, streaks, what shipped lately and the language mix."""
+PIPELINE = (
+    ("Alert", "Alertmanager fires on a production incident."),
+    ("Diagnose", "Three CrewAI agents trace it to the root cause."),
+    ("Patch", "They write the smallest change that fixes it."),
+    ("Prove", "The patch runs in a Docker sandbox under OPA."),
+    ("Ship", "Only a fix that passes becomes a pull request."),
+)
+
+
+def featured(p: Profile, f: Fonts) -> str:
+    """GhostOps, the flagship, as the path one incident takes from alert to pull request."""
     h = 1000
     inner = HALF - 2 * PAD
-    body = [_frame(HALF, h, "~/STATS", "LAST 12 MONTHS", f)]
-
-    big = text_path(f.display, f"{p.contributions:,}", 128, tracking=-0.03)
-    body.append(_at(text_path(f.mono, "CONTRIBUTIONS", 13, tracking=0.25), PAD, 112, MUTED))
-    body.append(f'<g>{_at(big, PAD - 4, 252, AURORA)}{_appear(0.2)}</g>')
-    body.append(_at(text_path(f.sans, f"in the last year  ·  on GitHub since {p.since}", 22), PAD, 296, MUTED))
-
-    tiles = (("CURRENT STREAK", f"{p.current_streak}d"), ("LONGEST STREAK", f"{p.longest_streak}d"), ("PUBLIC REPOS", f"{p.repo_count}"))
-    gap = 16
-    tw = (inner - 2 * gap) / 3
-    for i, (label, value) in enumerate(tiles):
-        x = PAD + i * (tw + gap)
-        tile = (
-            f'<rect x="{x:.1f}" y="334" width="{tw:.1f}" height="128" rx="14" fill="{TILE}" stroke="{EDGE}" stroke-width="1.5"/>'
-            + _at(text_path(f.display, value, 54, tracking=-0.02), x + 22, 410, INK)
-            + _at(text_path(f.mono, label, 14, tracking=0.15), x + 22, 444, MUTED)
+    body = [
+        _frame(HALF, h, "~/FEATURED", "GHOSTOPS ↗", f),
+        _at(text_path(f.mono, "AUTONOMOUS AIOPS", 13, tracking=0.25), PAD, 112, MUTED),
+        f'<g>{_at(text_path(f.display, "GhostOps", 66, tracking=-0.02), PAD - 2, 188, AURORA)}{_appear(0.2)}</g>',
+        _at(fit_path(f.bold, "Production incidents, patched on their own", 26, inner), PAD, 232, INK),
+    ]
+    top, step, cx = 318, 104, PAD + 24
+    bottom = top + step * (len(PIPELINE) - 1)
+    # The rail, and a pulse that keeps running down it like an incident moving through.
+    body.append(
+        f'<line x1="{cx}" y1="{top}" x2="{cx}" y2="{bottom}" stroke="{EDGE}" stroke-width="2"/>'
+        f'<circle cx="{cx}" cy="{top}" r="5" fill="{ACCENT}">'
+        f'<animate attributeName="cy" values="{top};{bottom}" dur="4s" repeatCount="indefinite"/>'
+        '<animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="4s" repeatCount="indefinite"/></circle>'
+    )
+    for i, (title, line) in enumerate(PIPELINE):
+        y = top + i * step
+        num = text_path(f.mono, f"{i + 1}", 18)
+        last = i == len(PIPELINE) - 1
+        node = (
+            f'<circle cx="{cx}" cy="{y}" r="24" fill="{TILE}" stroke="{ACCENT if last else EDGE}" stroke-width="2"/>'
+            + _at(num, cx - num.width / 2, y + 7, ACCENT)
+            + _at(text_path(f.bold, title, 26), cx + 48, y - 4, INK)
+            + _at(fit_path(f.sans, line, 21, inner - 72), cx + 48, y + 26, MUTED)
         )
-        body.append(f"<g>{tile}{_appear(0.4 + i * 0.1)}</g>")
-
-    # Recently shipped: the latest repos to move, live from GitHub.
-    body.append(_at(text_path(f.mono, "RECENTLY SHIPPED", 13, tracking=0.25), PAD, 524, MUTED))
-    for i, repo in enumerate(p.repos[:4]):
-        y = 572 + i * 42
-        name = text_path(f.bold, repo.name, 21)
-        when = text_path(f.mono, _ago(p, repo.pushed), 14)
-        row = f'<circle cx="{PAD + 6}" cy="{y - 7}" r="6" fill="{repo.color}"/>' + _at(name, PAD + 22, y, INK)
-        if repo.language:
-            row += _at(text_path(f.mono, repo.language, 14), PAD + 22 + name.width + 14, y - 1, MUTED)
-        row += _at(when, HALF - PAD - when.width, y - 1, ACCENT if i == 0 else FAINT)
-        if i:
-            row += f'<line x1="{PAD}" y1="{y - 30}" x2="{HALF - PAD}" y2="{y - 30}" stroke="{RULE}" stroke-width="1"/>'
-        body.append(f"<g>{row}{_appear(0.6 + i * 0.1, 0)}</g>")
-
-    # Languages, by bytes across all public repos.
-    langs = p.languages[:6]
-    total = sum(s for *_, s in langs) or 1
-    ly = 760
-    body.append(_at(text_path(f.mono, "LANGUAGES", 13, tracking=0.25), PAD, ly, MUTED))
-    body.append(f'<clipPath id="bar"><rect x="{PAD}" y="{ly + 22}" width="{inner}" height="14" rx="7"/></clipPath><g clip-path="url(#bar)">')
-    x = PAD
-    for _, color, share in langs:
-        w = inner * share / total
-        body.append(f'<rect x="{x:.1f}" y="{ly + 22}" width="{w + 0.5:.1f}" height="14" fill="{color}"/>')
-        x += w
-    body.append("</g>")
-    colw = inner / 3
-    for i, (name, color, share) in enumerate(langs):
-        cx = PAD + (i % 3) * colw
-        cy = ly + 76 + (i // 3) * 36
-        body.append(
-            f'<circle cx="{cx + 6}" cy="{cy - 6}" r="6" fill="{color}"/>'
-            + _at(text_path(f.sans, name, 20), cx + 22, cy, INK)
-            + _at(text_path(f.mono, f"{share / total:.0%}", 15), cx + 22 + text_path(f.sans, name, 20).width + 10, cy, MUTED)
-        )
-    body.append(_footer(HALF, h, p, f, "refreshed hourly from GitHub"))
-    return _svg(HALF, h, f"Stats: {p.contributions} contributions in the last year, current streak {p.current_streak} days, longest {p.longest_streak} days, {p.repo_count} public repos.", "".join(body))
+        body.append(f"<g>{node}{_appear(0.5 + i * 0.18, 0)}</g>")
+    ry = bottom + 70
+    result = text_path(f.bold, "2 incidents fixed end to end", 22)
+    body.append(
+        f'<g><rect x="{PAD}" y="{ry}" width="{inner}" height="64" rx="12" fill="{TILE}" stroke="{EDGE}" stroke-width="1.5"/>'
+        f'<circle cx="{PAD + 34}" cy="{ry + 32}" r="13" fill="{GREEN}"/>'
+        f'<path d="M{PAD + 28} {ry + 32} l4.5 4.5 l8 -9" fill="none" stroke="{PAGE}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>'
+        + _at(result, PAD + 62, ry + 40, INK) + f"{_appear(0.5 + len(PIPELINE) * 0.18, 0)}</g>"
+    )
+    body.append(_pills(f, ["CrewAI", "Claude API", "FastAPI", "Kubernetes", "OPA"], PAD, h - 72, inner))
+    return _svg(HALF, h, "Featured: GhostOps. Alertmanager fires; CrewAI agents find the root cause, write a minimal patch, prove it in a Docker sandbox under OPA, and open a pull request. 2 incidents fixed end to end.", "".join(body))
 
 
 # ---- page: how I work ------------------------------------------------------------------

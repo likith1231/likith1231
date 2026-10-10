@@ -72,7 +72,7 @@ def readme(p: data.Profile) -> str:
 
 {img("ep-01", "01: About")}
 
-{img("stats", "Stats: contributions, streaks, recently shipped repos and languages", "49%")} {img("whoami", "whoami: role, stack and what I have shipped", "49%")}
+<a href="https://github.com/{data.USER}/ghostops">{img("featured", "Featured: GhostOps, how an incident goes from alert to a proven pull request", "49%")}</a> {img("whoami", "whoami: role, stack and what I have shipped", "49%")}
 
 {img("ep-02", "02: Projects")}
 
@@ -116,7 +116,7 @@ def render(p: data.Profile, f: pages.Fonts, write) -> None:
     for i, (title, line) in enumerate(sections, start=1):
         write(f"ep-{i:02d}", pages.title_card(i, title, line, f))
     write("whoami", pages.whoami(p, f))
-    write("stats", pages.stats(p, f))
+    write("featured", pages.featured(p, f))
     for i, proj in enumerate(pages.PROJECTS, start=1):
         write(f"entry-{i}", pages.entry(p, i, proj, f))
     write("rules", pages.rules(p, f))
