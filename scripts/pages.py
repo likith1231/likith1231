@@ -132,11 +132,6 @@ def _wrap(font: FontRef, text: str, size: float, width: float, lines: int) -> li
     return out
 
 
-def _ago(p: Profile, d) -> str:
-    n = (p.today - d).days
-    return "today" if n <= 0 else "yesterday" if n == 1 else f"{n} days ago"
-
-
 def _pills(f: Fonts, items: list[str], x: float, y: float, max_width: float, size: float = 14) -> str:
     """A row of rounded tags, shrunk together until the row fits."""
     while True:
@@ -203,7 +198,6 @@ def whoami(p: Profile, f: Fonts) -> str:
             ("ship", "Docker · GitHub Actions · Vault · k6"),
         ),
         (
-            ("activity", f"{p.contributions:,} contributions · {p.current_streak}-day streak"),
             ("proof", "GhostOps: 2 incidents fixed end to end"),
         ),
     )
@@ -217,7 +211,7 @@ def whoami(p: Profile, f: Fonts) -> str:
         body.append(f'<line x1="{PAD}" y1="{y - 24}" x2="{HALF - PAD}" y2="{y - 24}" stroke="{RULE}" stroke-width="1.5"/>')
         y += 14
         for key, value in group:
-            row = _at(_mono(f, key), PAD, y, MUTED) + _at(_mono(f, value), PAD + 150, y, AURORA if key == "activity" else INK)
+            row = _at(_mono(f, key), PAD, y, MUTED) + _at(_mono(f, value), PAD + 150, y, INK)
             body.append(f"<g>{row}{_appear(delay, 0)}</g>")
             y += 38
             delay += 0.06
@@ -234,72 +228,60 @@ def whoami(p: Profile, f: Fonts) -> str:
         '<animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.5;0.5;1" dur="1.1s" repeatCount="indefinite"/></rect>'
         f"{_appear(delay + 0.1, 0)}</g>"
     )
-    body.append(_footer(HALF, h, p, f, f"{p.contributions:,} contributions in the last year"))
-    return _svg(HALF, h, f"whoami: Likith Lochan, DevOps, Full-Stack and Applied AI. {p.contributions} contributions in the last year.", "".join(body))
+    body.append(_footer(HALF, h, p, f, "Bengaluru · UTC+5:30"))
+    return _svg(HALF, h, "whoami: Likith Lochan, DevOps, Full-Stack and Applied AI.", "".join(body))
 
 
-# ---- page: stats -----------------------------------------------------------------------
+# ---- page: about ---------------------------------------------------------------------
 
-def stats(p: Profile, f: Fonts) -> str:
-    """The year in numbers: contributions, streaks, what shipped lately and the language mix."""
+AREAS = (
+    ("loop", "DevOps & Cloud", "Kubernetes, Terraform and CI/CD that ship and self-heal."),
+    ("layers", "Full-Stack", "React and Next.js on FastAPI and Node back ends."),
+    ("spark", "Applied AI", "Agents and RAG that do real work, gated by tests."),
+)
+ICONS = {
+    "loop": "M-11 0 C-11 -9 -3 -9 0 0 C3 9 11 9 11 0 C11 -9 3 -9 0 0 C-3 9 -11 9 -11 0 Z",
+    "layers": "M0 -11 L12 -5 L0 1 L-12 -5 Z M-12 1 L0 7 L12 1 M-12 7 L0 13 L12 7",
+    "spark": "M0 -13 C1.5 -4 4 -1.5 13 0 C4 1.5 1.5 4 0 13 C-1.5 4 -4 1.5 -13 0 C-4 -1.5 -1.5 -4 0 -13 Z",
+}
+
+
+def about(f: Fonts) -> str:
+    """Who I am in a few lines: what I build, the three things I do, and the roles I'm open to."""
     h = 1000
     inner = HALF - 2 * PAD
-    body = [_frame(HALF, h, "~/STATS", "LAST 12 MONTHS", f)]
+    body = [
+        _frame(HALF, h, "~/ABOUT", "README.MD", f),
+        _at(text_path(f.mono, "ABOUT ME", 13, tracking=0.25), PAD, 112, MUTED),
+        f'<g>{_at(text_path(f.display, "I build it, ship it,", 50, tracking=-0.02), PAD - 2, 178, INK)}{_appear(0.15)}</g>',
+        f'<g>{_at(text_path(f.display, "and keep it running.", 50, tracking=-0.02), PAD - 2, 236, AURORA)}{_appear(0.3)}</g>',
+    ]
+    intro = ("A CSE student in Bengaluru who builds software end to end: the app, the "
+             "infrastructure it runs on, and the AI that helps keep it healthy.")
+    for k, line in enumerate(_wrap(f.sans, intro, 23, inner, 3)):
+        body.append(_at(text_path(f.sans, line, 23), PAD, 298 + k * 33, MUTED))
 
-    big = text_path(f.display, f"{p.contributions:,}", 128, tracking=-0.03)
-    body.append(_at(text_path(f.mono, "CONTRIBUTIONS", 13, tracking=0.25), PAD, 112, MUTED))
-    body.append(f'<g>{_at(big, PAD - 4, 252, AURORA)}{_appear(0.2)}</g>')
-    body.append(_at(text_path(f.sans, f"in the last year  ·  on GitHub since {p.since}", 22), PAD, 296, MUTED))
-
-    tiles = (("CURRENT STREAK", f"{p.current_streak}d"), ("LONGEST STREAK", f"{p.longest_streak}d"), ("PUBLIC REPOS", f"{p.repo_count}"))
-    gap = 16
-    tw = (inner - 2 * gap) / 3
-    for i, (label, value) in enumerate(tiles):
-        x = PAD + i * (tw + gap)
-        tile = (
-            f'<rect x="{x:.1f}" y="334" width="{tw:.1f}" height="128" rx="14" fill="{TILE}" stroke="{EDGE}" stroke-width="1.5"/>'
-            + _at(text_path(f.display, value, 54, tracking=-0.02), x + 22, 410, INK)
-            + _at(text_path(f.mono, label, 14, tracking=0.15), x + 22, 444, MUTED)
+    body.append(_at(text_path(f.mono, "WHAT I DO", 13, tracking=0.25), PAD, 430, MUTED))
+    for i, (icon, title, line) in enumerate(AREAS):
+        y = 464 + i * 104
+        row = (
+            f'<rect x="{PAD}" y="{y}" width="64" height="64" rx="14" fill="{TILE}" stroke="{EDGE}" stroke-width="1.5"/>'
+            f'<path transform="translate({PAD + 32} {y + 32})" d="{ICONS[icon]}" fill="none" stroke="{ACCENT}" '
+            'stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>'
+            + _at(text_path(f.bold, title, 26), PAD + 88, y + 26, INK)
+            + _at(fit_path(f.sans, line, 21, inner - 88), PAD + 88, y + 56, MUTED)
         )
-        body.append(f"<g>{tile}{_appear(0.4 + i * 0.1)}</g>")
-
-    # Recently shipped: the latest repos to move, live from GitHub.
-    body.append(_at(text_path(f.mono, "RECENTLY SHIPPED", 13, tracking=0.25), PAD, 524, MUTED))
-    for i, repo in enumerate(p.repos[:4]):
-        y = 572 + i * 42
-        name = text_path(f.bold, repo.name, 21)
-        when = text_path(f.mono, _ago(p, repo.pushed), 14)
-        row = f'<circle cx="{PAD + 6}" cy="{y - 7}" r="6" fill="{repo.color}"/>' + _at(name, PAD + 22, y, INK)
-        if repo.language:
-            row += _at(text_path(f.mono, repo.language, 14), PAD + 22 + name.width + 14, y - 1, MUTED)
-        row += _at(when, HALF - PAD - when.width, y - 1, ACCENT if i == 0 else FAINT)
         if i:
-            row += f'<line x1="{PAD}" y1="{y - 30}" x2="{HALF - PAD}" y2="{y - 30}" stroke="{RULE}" stroke-width="1"/>'
-        body.append(f"<g>{row}{_appear(0.6 + i * 0.1, 0)}</g>")
+            row += f'<line x1="{PAD}" y1="{y - 20}" x2="{HALF - PAD}" y2="{y - 20}" stroke="{RULE}" stroke-width="1.5"/>'
+        body.append(f"<g>{row}{_appear(0.5 + i * 0.15, 0)}</g>")
 
-    # Languages, by bytes across all public repos.
-    langs = p.languages[:6]
-    total = sum(s for *_, s in langs) or 1
-    ly = 760
-    body.append(_at(text_path(f.mono, "LANGUAGES", 13, tracking=0.25), PAD, ly, MUTED))
-    body.append(f'<clipPath id="bar"><rect x="{PAD}" y="{ly + 22}" width="{inner}" height="14" rx="7"/></clipPath><g clip-path="url(#bar)">')
-    x = PAD
-    for _, color, share in langs:
-        w = inner * share / total
-        body.append(f'<rect x="{x:.1f}" y="{ly + 22}" width="{w + 0.5:.1f}" height="14" fill="{color}"/>')
-        x += w
-    body.append("</g>")
-    colw = inner / 3
-    for i, (name, color, share) in enumerate(langs):
-        cx = PAD + (i % 3) * colw
-        cy = ly + 76 + (i // 3) * 36
-        body.append(
-            f'<circle cx="{cx + 6}" cy="{cy - 6}" r="6" fill="{color}"/>'
-            + _at(text_path(f.sans, name, 20), cx + 22, cy, INK)
-            + _at(text_path(f.mono, f"{share / total:.0%}", 15), cx + 22 + text_path(f.sans, name, 20).width + 10, cy, MUTED)
-        )
-    body.append(_footer(HALF, h, p, f, "refreshed hourly from GitHub"))
-    return _svg(HALF, h, f"Stats: {p.contributions} contributions in the last year, current streak {p.current_streak} days, longest {p.longest_streak} days, {p.repo_count} public repos.", "".join(body))
+    oy = 820
+    body.append(
+        f'<g><circle cx="{PAD + 6}" cy="{oy - 5}" r="6" fill="{GREEN}"><animate attributeName="opacity" values="1;0.35;1" dur="2.2s" repeatCount="indefinite"/></circle>'
+        + _at(text_path(f.mono, "OPEN TO", 13, tracking=0.25), PAD + 22, oy, MUTED) + "</g>"
+    )
+    body.append(_pills(f, ["DevOps / Cloud", "SDE", "AI / ML"], PAD, oy + 24, inner, size=18))
+    return _svg(HALF, h, "About me: I build it, ship it, and keep it running. A CSE student in Bengaluru who builds software end to end. DevOps and Cloud, Full-Stack, Applied AI. Open to DevOps/Cloud, SDE and AI/ML roles.", "".join(body))
 
 
 # ---- page: how I work ------------------------------------------------------------------

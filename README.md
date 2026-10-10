@@ -5,7 +5,7 @@
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="./assets/dark/ep-01.svg"><img src="./assets/ep-01.svg" width="100%" alt="01: About"></picture>
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="./assets/dark/stats.svg"><img src="./assets/stats.svg" width="49%" alt="Stats: contributions, streaks, recently shipped repos and languages"></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="./assets/dark/whoami.svg"><img src="./assets/whoami.svg" width="49%" alt="whoami: role, stack and what I have shipped"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="./assets/dark/about.svg"><img src="./assets/about.svg" width="49%" alt="About me: I build it, ship it, and keep it running. DevOps and Cloud, Full-Stack, Applied AI."></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="./assets/dark/whoami.svg"><img src="./assets/whoami.svg" width="49%" alt="whoami: role, stack and what I have shipped"></picture>
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="./assets/dark/ep-02.svg"><img src="./assets/ep-02.svg" width="100%" alt="02: Projects"></picture>
 

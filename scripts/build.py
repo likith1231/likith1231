@@ -72,7 +72,7 @@ def readme(p: data.Profile) -> str:
 
 {img("ep-01", "01: About")}
 
-{img("stats", "Stats: contributions, streaks, recently shipped repos and languages", "49%")} {img("whoami", "whoami: role, stack and what I have shipped", "49%")}
+{img("about", "About me: I build it, ship it, and keep it running. DevOps and Cloud, Full-Stack, Applied AI.", "49%")} {img("whoami", "whoami: role, stack and what I have shipped", "49%")}
 
 {img("ep-02", "02: Projects")}
 
@@ -116,7 +116,7 @@ def render(p: data.Profile, f: pages.Fonts, write) -> None:
     for i, (title, line) in enumerate(sections, start=1):
         write(f"ep-{i:02d}", pages.title_card(i, title, line, f))
     write("whoami", pages.whoami(p, f))
-    write("stats", pages.stats(p, f))
+    write("about", pages.about(f))
     for i, proj in enumerate(pages.PROJECTS, start=1):
         write(f"entry-{i}", pages.entry(p, i, proj, f))
     write("rules", pages.rules(p, f))
