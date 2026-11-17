@@ -22,7 +22,7 @@ FONT_FILES = {
     "Inter[opsz,wght].ttf": "ofl/inter/Inter%5Bopsz,wght%5D.ttf",
     "JetBrainsMono[wght].ttf": "ofl/jetbrainsmono/JetBrainsMono%5Bwght%5D.ttf",
 }
-PORTFOLIO = "https://portfolio-zeta-navy-fylz2ik8js.vercel.app/"
+PORTFOLIO = "https://likith-lochan.vercel.app/"
 LINKS = (
     ("Portfolio", PORTFOLIO),
     ("LinkedIn", "https://www.linkedin.com/in/likith-lochan-2ab93b290"),
